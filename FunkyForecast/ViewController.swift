@@ -19,7 +19,7 @@ class ViewController: UIViewController
         let currentWeatherUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
         let hourlyWeatherUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
         let sevenDayForecastUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
-        let url = URL(string: currentWeatherUrl)
+        if let url = URL(string: currentWeatherUrl)
         {
             if let myData = try? Data(contentsOf: currentWeatherUrl, options: [])
             {
@@ -28,7 +28,7 @@ class ViewController: UIViewController
             }
             
         }
-        let url1 = URL(string: hourlyWeatherUrl)
+        if let url1 = URL(string: hourlyWeatherUrl)
         {
             if let myDataHourly = try? Data(contentsOf: hourlyWeatherUrl, options: [])
             {
@@ -38,7 +38,7 @@ class ViewController: UIViewController
             
         }
         
-        let url3 = URL(string: sevenDayForecastUrl)
+        if let url3 = URL(string: sevenDayForecastUrl)
         {
             if let myDataWeekly = try? Data(contentsOf: sevenDayForecastUrl, options: [])
             {
@@ -52,6 +52,11 @@ class ViewController: UIViewController
 
 
 
+    }
+    
+    func parse(myData:JSON)
+    {
+        for i in myData[
     }
 
 
