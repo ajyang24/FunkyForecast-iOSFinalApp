@@ -11,10 +11,46 @@ import UIKit
 
 class ViewController: UIViewController
 {
+    var locations = [[String: String]]()
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        let currentWeatherUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
+        let hourlyWeatherUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
+        let sevenDayForecastUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
+        let url = URL(string: currentWeatherUrl)
+        {
+            if let myData = try? Data(contentsOf: currentWeatherUrl, options: [])
+            {
+                let json = JSON(myData)
+                parse(myData: json)
+            }
+            
+        }
+        let url1 = URL(string: hourlyWeatherUrl)
+        {
+            if let myDataHourly = try? Data(contentsOf: hourlyWeatherUrl, options: [])
+            {
+                let json = JSON(myDataHourly)
+                parse(myDataHourly: json)
+            }
+            
+        }
+        
+        let url3 = URL(string: sevenDayForecastUrl)
+        {
+            if let myDataWeekly = try? Data(contentsOf: sevenDayForecastUrl, options: [])
+            {
+                let json = JSON(myDataWeekly)
+                parse(myDataWeekly: json)
+            }
+            
+        }
+        
+        
+
+
 
     }
 
