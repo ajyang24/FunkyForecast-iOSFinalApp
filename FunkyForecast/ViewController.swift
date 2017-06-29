@@ -14,6 +14,9 @@ class ViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        var prefersStatusBarHidden: Bool {
+            return true
+        }
 
     }
 
