@@ -88,12 +88,14 @@
 				6456D6311F053DE7008DCB2A /* FunkyForecast-Bridging-Header.h */,
 			);
 			name = SWRevealViewController;
+			path = FunkyForecast;
 			sourceTree = "<group>";
 		};
 		E5F3108E1F041FB4007867FB = {
 			isa = PBXGroup;
 			children = (
 				E5F310991F041FB4007867FB /* FunkyForecast */,
+				6456D6301F053DAD008DCB2A /* SWRevealViewController */,
 				E5F310AE1F041FB5007867FB /* FunkyForecastTests */,
 				E5F310B91F041FB5007867FB /* FunkyForecastUITests */,
 				E5F310981F041FB4007867FB /* Products */,
@@ -114,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				E5F3109A1F041FB4007867FB /* AppDelegate.swift */,
-				6456D6301F053DAD008DCB2A /* SWRevealViewController */,
 				E5F3109C1F041FB4007867FB /* ViewController.swift */,
 				6456D62C1F053289008DCB2A /* SwiftyJSON-1.swift */,
 				E5F3109E1F041FB4007867FB /* Main.storyboard */,
