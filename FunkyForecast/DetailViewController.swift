@@ -34,12 +34,14 @@ class DetailViewController: UIViewController
         
         moreInfoView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         moreInfoView.alpha = 0
+        visualEffectView.alpha = 0
         
         UIView.animate(withDuration: 0.4)
         {
             self.visualEffectView.effect = self.effect
             self.moreInfoView.alpha = 1
             self.moreInfoView.transform = CGAffineTransform.identity
+
         }
     }
     
@@ -57,10 +59,12 @@ class DetailViewController: UIViewController
     
     
     @IBAction func moreInfoButtonPressed(_ sender: Any) {
+        visualEffectView.alpha = 1
         animateIn()
     }
     
     @IBAction func dismissButtonPressed(_ sender: Any) {
+        visualEffectView.alpha = 0
         animateOut()
     }
 
