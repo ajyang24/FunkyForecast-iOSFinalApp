@@ -8,9 +8,12 @@
 
 import UIKit
 
-class DetailViewController: UIViewController
+class DetailViewController: UIViewController, SideBarDelegate
 {
+    var sideBar:SideBar = SideBar()
+
     @IBOutlet var moreInfoView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
 
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
@@ -23,7 +26,11 @@ class DetailViewController: UIViewController
         visualEffectView.effect = nil
         
         moreInfoView.layer.cornerRadius = 5
-
+        
+        
+        imageView.image = UIImage(named: "image2")
+        sideBar = SideBar(sourceView: self.view, menuItems: ["first item", "second item", "funny item", "another item"])
+        sideBar.delegate = self
 
     }
 
@@ -66,6 +73,17 @@ class DetailViewController: UIViewController
     @IBAction func dismissButtonPressed(_ sender: Any) {
         visualEffectView.alpha = 0
         animateOut()
+    }
+    
+    
+    func sideBarDidSelectButtonAtIndex(_ index: Int) {
+        if index == 0{
+            imageView.backgroundColor = UIColor.red
+            imageView.image = nil
+        } else if index == 1{
+            imageView.backgroundColor = UIColor.clear
+            imageView.image = UIImage(named: "image2")
+        }
     }
 
 

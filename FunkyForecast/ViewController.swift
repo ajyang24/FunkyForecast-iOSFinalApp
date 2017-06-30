@@ -11,7 +11,8 @@ import UIKit
 
 class ViewController: UIViewController
 {
-    
+    var sideBar:SideBar = SideBar()
+
     
 
     override func viewDidLoad()
@@ -21,10 +22,13 @@ class ViewController: UIViewController
         let hourlyWeatherUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
         let sevenDayForecastUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
         
-
+        
 
 
     }
+    
+    
+    
     
  
 

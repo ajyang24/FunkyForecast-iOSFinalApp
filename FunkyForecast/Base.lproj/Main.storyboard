@@ -75,6 +75,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIl-hP-VbG">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                                         <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7DW-Ph-ZPS">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
+                                            </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="locationicon" translatesAutoresizingMaskIntoConstraints="NO" id="f92-jP-q5F">
                                                 <rect key="frame" x="98" y="14" width="12" height="12"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -174,7 +177,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="7DW-Ph-ZPS" secondAttribute="bottom" id="68h-0e-Ial"/>
                                             <constraint firstAttribute="height" constant="1000" id="TQu-wd-wfR"/>
+                                            <constraint firstAttribute="trailing" secondItem="7DW-Ph-ZPS" secondAttribute="trailing" id="jvf-b1-E6Q"/>
+                                            <constraint firstItem="7DW-Ph-ZPS" firstAttribute="leading" secondItem="eIl-hP-VbG" secondAttribute="leading" id="kh3-YJ-qax"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -199,6 +205,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="imageView" destination="7DW-Ph-ZPS" id="BFX-Id-HjR"/>
                         <outlet property="moreInfoView" destination="HFs-3v-KIJ" id="QP1-W2-NZf"/>
                         <outlet property="visualEffectView" destination="MfD-iq-eva" id="i3c-Hh-BIy"/>
                     </connections>
