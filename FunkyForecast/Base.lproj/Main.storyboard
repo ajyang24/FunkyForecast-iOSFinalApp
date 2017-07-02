@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Sunset Sea 15 iPhone 6 Wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="Kkl-m9-kJG">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dor-xE-tfo">
                                 <rect key="frame" x="2" y="452" width="318" height="38"/>
@@ -47,7 +47,6 @@
                         <constraints>
                             <constraint firstItem="Kkl-m9-kJG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eKR-vm-JHT"/>
                             <constraint firstAttribute="trailing" secondItem="Kkl-m9-kJG" secondAttribute="trailing" id="eLl-o0-w5C"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Kkl-m9-kJG" secondAttribute="bottom" id="eud-KD-1JS"/>
                             <constraint firstItem="Kkl-m9-kJG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sSn-lH-6BC"/>
                         </constraints>
                     </view>
@@ -55,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113.75" y="123.59154929577466"/>
+            <point key="canvasLocation" x="1113" y="123"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="Pdq-g6-1Cx">
