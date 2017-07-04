@@ -204,9 +204,16 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="currentTemp" destination="kxJ-yY-4JS" id="xhN-Mu-rWD"/>
                         <outlet property="imageView" destination="7DW-Ph-ZPS" id="BFX-Id-HjR"/>
+                        <outlet property="locationLabel" destination="gNu-2b-noC" id="tbH-Ue-Aup"/>
                         <outlet property="moreInfoView" destination="HFs-3v-KIJ" id="QP1-W2-NZf"/>
+                        <outlet property="quoteLabel" destination="2Pv-Eg-maw" id="KBP-tl-hAs"/>
+                        <outlet property="timeLabel" destination="Qbl-kE-m4F" id="ixR-bQ-ZDK"/>
+                        <outlet property="todayHigh" destination="sKQ-EN-Tc4" id="biU-ZA-CuN"/>
+                        <outlet property="todayLow" destination="vjq-Hs-Tnk" id="1gY-e0-8wf"/>
                         <outlet property="visualEffectView" destination="MfD-iq-eva" id="i3c-Hh-BIy"/>
+                        <outlet property="weatherName" destination="vEo-BH-mIA" id="mz8-k5-ouB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqc-6i-NPN" userLabel="First Responder" sceneMemberID="firstResponder"/>

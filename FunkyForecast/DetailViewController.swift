@@ -18,6 +18,18 @@ class DetailViewController: UIViewController, SideBarDelegate
 
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
+
+    
+    @IBOutlet weak var todayLow: UILabel!
+    @IBOutlet weak var todayHigh: UILabel!
+    @IBOutlet weak var currentTemp: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var weatherName: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var quoteLabel: UILabel!
+    
+    
+    
     var effect:UIVisualEffect!
     
     override func viewDidLoad()
@@ -65,6 +77,9 @@ class DetailViewController: UIViewController, SideBarDelegate
         imageView.image = UIImage(named: "image2")
         sideBar = SideBar(sourceView: self.view, menuItems: ["first item", "second item", "funny item", "another item"])
         sideBar.delegate = self
+        
+       
+    
 
     }
     
@@ -96,7 +111,7 @@ class DetailViewController: UIViewController, SideBarDelegate
             let visibilityKm = i["visibility_km"].stringValue
             let uvIndex = i["UV"].stringValue
             
-            let obj = ["full": fullName, "country": country, "zip": zip, "latitude": latitude, "longitude": longitude, "elevation": elevation, "temp_f": tempF, "temp_c": tempC, "relative_humidity": humidity, "weather": weather, "wind_string": windString, "wind_dir": windDir, "wind_mph": windMph, "wind_kph": windKph, "dewpoint_f": dewpointF, "dewpoint_c": dewpointC, "windchill_f": windchillF, "windchill_c": windchillC, "feelslike_f": feelsLikeF, "feelslike_c": feelsLikeC, "visibility_mi": visibilityMi, "visibility_km": visibilityKm, "UV": uvIndex]
+            let obj = [tempF : "temp_f"]
             locations.append(obj)
         }
     }
