@@ -63,6 +63,7 @@ class SideBarTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          delegate?.sideBarControlDidSelectRow(indexPath)
+        
     }
 
 }

@@ -16,10 +16,14 @@ class DetailViewController: UIViewController, SideBarDelegate
     @IBOutlet var moreInfoView: UIView!
     @IBOutlet weak var imageView: UIImageView!
 
+    @IBOutlet weak var settingsView: UIView!
+    
+    
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     @IBOutlet weak var locationsView: UIView!
 
+    @IBOutlet weak var aboutView: UIView!
     
     @IBOutlet weak var todayLow: UILabel!
     @IBOutlet weak var todayHigh: UILabel!
@@ -37,7 +41,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     {
         super.viewDidLoad()
 //        let location = locations[]
-//        quoteLabel.text = "Test"
+        quoteLabel.text = "Test"
 //        currentTemp.text = location["temp_f"]
         
         let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
@@ -75,11 +79,13 @@ class DetailViewController: UIViewController, SideBarDelegate
 //        effect = visualEffectView.effect
 //        visualEffectView.effect = nil
         visualEffectView.alpha = 0
+        aboutView.alpha = 0
+        settingsView.alpha = 0
 //        moreInfoView.layer.cornerRadius = 5
 //        
 //        
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About"])
+        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About", "Weather"])
         sideBar.delegate = self
         
         locationsView.alpha = 0
@@ -202,10 +208,31 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     
     func sideBarDidSelectButtonAtIndex(_ index: Int) {
-        if index == 0{
+        if index == 0
+        {
             locationsView.alpha = 1
-        } else if index == 1{
-            view.tintColor = UIColor.black
+            settingsView.alpha = 0
+            aboutView.alpha = 0
+        }
+            
+        else if index == 1
+        {
+            settingsView.alpha = 1
+            aboutView.alpha = 0
+            locationsView.alpha = 0
+
+        }
+        else if index == 2
+        {
+            aboutView.alpha = 1
+            locationsView.alpha = 0
+            settingsView.alpha = 0
+        }
+        else if index == 3
+        {
+            aboutView.alpha = 0
+            locationsView.alpha = 0
+            settingsView.alpha = 0
         }
     }
 
