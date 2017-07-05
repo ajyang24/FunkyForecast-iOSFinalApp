@@ -104,7 +104,7 @@ class DetailViewController: UIViewController, SideBarDelegate
         settingsView.alpha = 0
       
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About ⓘ", "Weather"])
+        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
         sideBar.delegate = self
         
         locationsView.alpha = 0
@@ -266,29 +266,32 @@ class DetailViewController: UIViewController, SideBarDelegate
     func sideBarDidSelectButtonAtIndex(_ index: Int) {
         if index == 0
         {
-            locationsView.alpha = 1
-            settingsView.alpha = 0
             aboutView.alpha = 0
+            locationsView.alpha = 0
+            settingsView.alpha = 0
+            
         }
             
         else if index == 1
         {
-            settingsView.alpha = 1
+            locationsView.alpha = 1
+            settingsView.alpha = 0
             aboutView.alpha = 0
-            locationsView.alpha = 0
+            
 
         }
         else if index == 2
         {
-            aboutView.alpha = 1
+            settingsView.alpha = 1
+            aboutView.alpha = 0
             locationsView.alpha = 0
-            settingsView.alpha = 0
         }
         else if index == 3
         {
-            aboutView.alpha = 0
+            aboutView.alpha = 1
             locationsView.alpha = 0
             settingsView.alpha = 0
+            
         }
     }
 
