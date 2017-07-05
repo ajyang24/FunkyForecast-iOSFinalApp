@@ -29,7 +29,6 @@ class DetailViewController: UIViewController, SideBarDelegate
     @IBOutlet weak var todayLow: UILabel!
     @IBOutlet weak var todayHigh: UILabel!
     @IBOutlet weak var currentTemp: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var weatherName: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
@@ -75,13 +74,18 @@ class DetailViewController: UIViewController, SideBarDelegate
         }
 
         visualEffectView.alpha = 0
+        aboutView.alpha = 0
+        locationsView.alpha = 0
+        settingsView.alpha = 0
       
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About", "Weather"])
+        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About  ⓘ", "Weather"])
         sideBar.delegate = self
         
         locationsView.alpha = 0
         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
+        
+        
 
     }
     
@@ -219,7 +223,8 @@ class DetailViewController: UIViewController, SideBarDelegate
     }
     
     
-    @IBAction func moreInfoButtonPressed(_ sender: Any) {
+    @IBAction func moreInfoButtonPressed(_ sender: Any)
+    {
         animateIn()
     }
     
