@@ -21,8 +21,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Sunset Sea 15 iPhone 6 Wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="Kkl-m9-kJG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Sunset Sea 15 iPhone 6 Wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="Kkl-m9-kJG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dor-xE-tfo">
                                 <rect key="frame" x="2" y="452" width="318" height="38"/>
@@ -44,11 +45,6 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Kkl-m9-kJG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eKR-vm-JHT"/>
-                            <constraint firstAttribute="trailing" secondItem="Kkl-m9-kJG" secondAttribute="trailing" id="eLl-o0-w5C"/>
-                            <constraint firstItem="Kkl-m9-kJG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sSn-lH-6BC"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="r0E-Iz-9Qh"/>
                 </viewController>
