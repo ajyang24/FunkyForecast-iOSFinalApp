@@ -151,10 +151,10 @@
                                         </constraints>
                                     </view>
                                     <visualEffectView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MfD-iq-eva">
-                                        <rect key="frame" x="0.0" y="33" width="320" height="933"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="UCb-CO-Dhl">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="933"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFs-3v-KIJ">
