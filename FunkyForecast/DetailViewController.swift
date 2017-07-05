@@ -110,6 +110,8 @@ class DetailViewController: UIViewController, SideBarDelegate
         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
         locationLabel.text = fullName
         quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
+        weatherName.text = weather
+        
 
         
         
