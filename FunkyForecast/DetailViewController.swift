@@ -36,9 +36,9 @@ class DetailViewController: UIViewController, SideBarDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-      //  let location = locations[]
-        quoteLabel.text = "Test"
-       // currentTemp.text = location["temp_f"]
+//        let location = locations[]
+//        quoteLabel.text = "Test"
+//        currentTemp.text = location["temp_f"]
         
         let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
         let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
@@ -72,13 +72,12 @@ class DetailViewController: UIViewController, SideBarDelegate
         }
 
         
-        effect = visualEffectView.effect
-        visualEffectView.effect = nil
-        
-        
-        moreInfoView.layer.cornerRadius = 5
-        
-        
+//        effect = visualEffectView.effect
+//        visualEffectView.effect = nil
+        visualEffectView.alpha = 0
+//        moreInfoView.layer.cornerRadius = 5
+//        
+//        
         imageView.image = UIImage(named: "image2")
         sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About"])
         sideBar.delegate = self
@@ -158,6 +157,9 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     func animateIn()
     {
+
+        moreInfoView.layer.cornerRadius = 5
+        
         self.view.addSubview(moreInfoView)
         moreInfoView.center = self.view.center
         
@@ -167,7 +169,10 @@ class DetailViewController: UIViewController, SideBarDelegate
         
         UIView.animate(withDuration: 0.4)
         {
+            self.effect = self.visualEffectView.effect
+            self.visualEffectView.effect = nil
             self.visualEffectView.effect = self.effect
+            self.visualEffectView.alpha = 1
             self.moreInfoView.alpha = 1
             self.moreInfoView.transform = CGAffineTransform.identity
 
@@ -175,11 +180,11 @@ class DetailViewController: UIViewController, SideBarDelegate
     }
     
     func animateOut () {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.moreInfoView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.moreInfoView.alpha = 0
-            
-            self.visualEffectView.effect = nil
+            self.visualEffectView.alpha = 0
+
             
         }) { (success:Bool) in
             self.moreInfoView.removeFromSuperview()
@@ -188,12 +193,10 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     
     @IBAction func moreInfoButtonPressed(_ sender: Any) {
-        visualEffectView.alpha = 1
         animateIn()
     }
     
     @IBAction func dismissButtonPressed(_ sender: Any) {
-        visualEffectView.alpha = 0
         animateOut()
     }
     
