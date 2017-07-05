@@ -122,6 +122,10 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
     
     func sideBarControlDidSelectRow(_ indexPath: IndexPath) {
         delegate?.sideBarDidSelectButtonAtIndex(indexPath.row)
+        if indexPath.row == 0
+        {
+            
+        }
     }
     
     

@@ -21,9 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Sunset Sea 15 iPhone 6 Wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="Kkl-m9-kJG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Sunset Sea 15 iPhone 6 Wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="Kkl-m9-kJG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dor-xE-tfo">
                                 <rect key="frame" x="2" y="452" width="318" height="38"/>
@@ -45,12 +44,17 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Kkl-m9-kJG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eKR-vm-JHT"/>
+                            <constraint firstAttribute="trailing" secondItem="Kkl-m9-kJG" secondAttribute="trailing" id="eLl-o0-w5C"/>
+                            <constraint firstItem="Kkl-m9-kJG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sSn-lH-6BC"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="r0E-Iz-9Qh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="123"/>
+            <point key="canvasLocation" x="921" y="119"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="Pdq-g6-1Cx">
@@ -130,13 +134,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTe-AH-WfU">
-                                                <rect key="frame" x="16" y="441" width="130" height="100"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <connections>
-                                                    <action selector="moreInfoButtonPressed:" destination="Ht9-M8-kxZ" eventType="touchUpInside" id="quO-XN-grl"/>
-                                                </connections>
-                                            </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="DBV-9W-1TA">
                                                 <rect key="frame" x="16" y="14" width="34" height="28"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -174,9 +171,46 @@
                                                 </view>
                                                 <blurEffect style="light"/>
                                             </visualEffectView>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fcf-gg-C6c">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yV4-qQ-7Qg">
+                                                        <rect key="frame" x="139" y="489" width="42" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChS-fi-is5">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unc-XM-B9C">
+                                                        <rect key="frame" x="139" y="489" width="42" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Vl-Mx-dEN">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locations " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9g-2D-XbD">
+                                                        <rect key="frame" x="139" y="489" width="42" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
@@ -209,12 +243,14 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="aboutView" destination="Fcf-gg-C6c" id="er1-sA-rJB"/>
                         <outlet property="currentTemp" destination="kxJ-yY-4JS" id="xhN-Mu-rWD"/>
                         <outlet property="imageView" destination="7DW-Ph-ZPS" id="BFX-Id-HjR"/>
                         <outlet property="locationLabel" destination="gNu-2b-noC" id="tbH-Ue-Aup"/>
                         <outlet property="locationsView" destination="8Vl-Mx-dEN" id="Ig7-fH-jJD"/>
                         <outlet property="moreInfoView" destination="HFs-3v-KIJ" id="QP1-W2-NZf"/>
                         <outlet property="quoteLabel" destination="2Pv-Eg-maw" id="KBP-tl-hAs"/>
+                        <outlet property="settingsView" destination="ChS-fi-is5" id="SyC-C4-LeC"/>
                         <outlet property="timeLabel" destination="Qbl-kE-m4F" id="ixR-bQ-ZDK"/>
                         <outlet property="todayHigh" destination="sKQ-EN-Tc4" id="biU-ZA-CuN"/>
                         <outlet property="todayLow" destination="vjq-Hs-Tnk" id="1gY-e0-8wf"/>

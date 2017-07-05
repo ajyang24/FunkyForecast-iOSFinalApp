@@ -17,10 +17,14 @@ class DetailViewController: UIViewController, SideBarDelegate
     @IBOutlet var moreInfoView: UIView!
     @IBOutlet weak var imageView: UIImageView!
 
+    @IBOutlet weak var settingsView: UIView!
+    
+    
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     @IBOutlet weak var locationsView: UIView!
 
+    @IBOutlet weak var aboutView: UIView!
     
     @IBOutlet weak var todayLow: UILabel!
     @IBOutlet weak var todayHigh: UILabel!
@@ -73,7 +77,7 @@ class DetailViewController: UIViewController, SideBarDelegate
         visualEffectView.alpha = 0
       
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About"])
+        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About", "Weather"])
         sideBar.delegate = self
         
         locationsView.alpha = 0
@@ -225,10 +229,31 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     
     func sideBarDidSelectButtonAtIndex(_ index: Int) {
-        if index == 0{
+        if index == 0
+        {
             locationsView.alpha = 1
-        } else if index == 1{
-            view.tintColor = UIColor.black
+            settingsView.alpha = 0
+            aboutView.alpha = 0
+        }
+            
+        else if index == 1
+        {
+            settingsView.alpha = 1
+            aboutView.alpha = 0
+            locationsView.alpha = 0
+
+        }
+        else if index == 2
+        {
+            aboutView.alpha = 1
+            locationsView.alpha = 0
+            settingsView.alpha = 0
+        }
+        else if index == 3
+        {
+            aboutView.alpha = 0
+            locationsView.alpha = 0
+            settingsView.alpha = 0
         }
     }
 
