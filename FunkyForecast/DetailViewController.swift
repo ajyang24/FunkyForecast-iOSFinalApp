@@ -58,7 +58,8 @@ class DetailViewController: UIViewController, SideBarDelegate
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
     
-    
+    var state = "IL"
+    var town = "Barrington"
     
     var effect:UIVisualEffect!
     
@@ -66,9 +67,9 @@ class DetailViewController: UIViewController, SideBarDelegate
     {
         super.viewDidLoad()
         
-        let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
-        let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
-        let sevenDayForecastUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Barrington.json"
+        let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(town).json"
+        let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(town).json"
+        let sevenDayForecastUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(town).json"
         
         if let url1 = URL(string: currentWeatherUrl)
         {
@@ -110,7 +111,7 @@ class DetailViewController: UIViewController, SideBarDelegate
         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
         locationLabel.text = fullName
         quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
-
+        weatherName.text = weather
         
         
         
