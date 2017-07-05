@@ -53,9 +53,6 @@ class DetailViewController: UIViewController, SideBarDelegate
     @IBOutlet weak var locationsView: UIView!
 
     @IBOutlet weak var aboutView: UIView!
-    
-    @IBOutlet weak var todayLow: UILabel!
-    @IBOutlet weak var todayHigh: UILabel!
     @IBOutlet weak var currentTemp: UILabel!
     @IBOutlet weak var weatherName: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
