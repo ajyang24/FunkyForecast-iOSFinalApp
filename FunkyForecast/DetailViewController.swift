@@ -18,6 +18,7 @@ class DetailViewController: UIViewController, SideBarDelegate
 
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
+    @IBOutlet weak var locationsView: UIView!
 
     
     @IBOutlet weak var todayLow: UILabel!
@@ -78,10 +79,10 @@ class DetailViewController: UIViewController, SideBarDelegate
 //        
 //        
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "About"])
+        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About"])
         sideBar.delegate = self
         
-    
+        locationsView.alpha = 0
 
     }
     
@@ -116,7 +117,6 @@ class DetailViewController: UIViewController, SideBarDelegate
             let obj = ["full": fullName, "country": country, "zip": zip, "latitude": latitude, "longitude": longitude, "elevation": elevation, "temp_f": tempF, "temp_c": tempC, "relative_humidity": humidity, "weather": weather, "wind_string": windString, "wind_dir": windDir, "wind_mph": windMph, "wind_kph": windKph, "dewpoint_f": dewpointF, "dewpoint_c": dewpointC, "windchill_f": windchillF, "windchill_c": windchillC, "feelslike_f": feelsLikeF, "feelslike_c": feelsLikeC, "visibility_mi": visibilityMi, "visibility_km": visibilityKm, "UV": uvIndex]
             locations.append(obj)
         }
-        view.reloadInputViews()
     }
     
     func parse2(myData2:JSON)
@@ -203,7 +203,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     func sideBarDidSelectButtonAtIndex(_ index: Int) {
         if index == 0{
-            view.tintColor = UIColor.black
+            locationsView.alpha = 1
         } else if index == 1{
             view.tintColor = UIColor.black
         }
