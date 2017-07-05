@@ -13,6 +13,34 @@ class DetailViewController: UIViewController, SideBarDelegate
     var sideBar:SideBar = SideBar()
     var locations = [[String: String]]()
     var tempF = 0.0
+    var tempC = 0.0
+    var weather = ""
+    var dewpointF = 0.0
+    var dewpointC = 0.0
+    var relativeHumidity = ""
+    var fullName = ""
+    var country = ""
+    var zip = ""
+    var latitude = ""
+    var longitude = ""
+    var elevation = ""
+    var windString = ""
+    var windDir = ""
+    var windMph = 0.0
+    var windKph = 0.0
+    var windchillF = ""
+    var windchillC = ""
+    var feelsLikeF = ""
+    var feelsLikeC = ""
+    var visibilityMi = ""
+    var visibilityKm = ""
+    var uvIndex = ""
+    
+    
+    
+    
+    
+    
 
     @IBOutlet var moreInfoView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -82,35 +110,37 @@ class DetailViewController: UIViewController, SideBarDelegate
         
         locationsView.alpha = 0
         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
+        locationLabel.text = fullName
+        
+        
 
     }
     
     func parse(myData:JSON)
     {
-        print(myData["current_observation"]["temp_f"])
+        fullName = myData["current_observation"]["display_location"]["full"].stringValue
+        country = myData["current_observation"]["display_location"]["country"].stringValue
+        zip = myData["current_observation"]["display_location"]["zip"].stringValue
+        latitude = myData["current_observation"]["display_location"]["latitude"].stringValue
+        longitude = myData["current_observation"]["display_location"]["longitude"].stringValue
+        elevation = myData["current_observation"]["display_location"]["elevation"].stringValue
+        tempC = myData["current_observation"]["temp_c"].doubleValue
         tempF = myData["current_observation"]["temp_f"].doubleValue
-        let fullName = myData["current_observation"]["full"].stringValue
-        let country = myData["current_observation"]["country"].stringValue
-        let zip = myData["current_observation"]["zip"].stringValue
-        let latitude = myData["current_observation"]["latitude"].stringValue
-        let longitude = myData["current_observation"]["longitude"].stringValue
-        let elevation = myData["current_observation"]["elevation"].stringValue
-        let tempC = myData["current_observation"]["temp_c"].stringValue
-        let humidity = myData["current_observation"]["relative_humidity"].stringValue
-        let weather = myData["current_observation"]["weather"].stringValue
-        let windString = myData["current_observation"]["wind_string"].stringValue
-        let windDir = myData["current_observation"]["wind_dir"].stringValue
-        let windMph = myData["current_observation"]["wind_mph"].stringValue
-        let windKph = myData["current_observation"]["wind_kph"].stringValue
-        let dewpointF = myData["current_observation"]["dewpoint_f"].stringValue
-        let dewpointC = myData["current_observation"]["dewpoint_C"].stringValue
-        let windchillF = myData["current_observation"]["windchill_f"].stringValue
-        let windchillC = myData["current_observation"]["windchill_c"].stringValue
-        let feelsLikeF = myData["current_observation"]["feelslike_f"].stringValue
-        let feelsLikeC = myData["current_observation"]["feelslike_c"].stringValue
-        let visibilityMi = myData["current_observation"]["visibility_mi"].stringValue
-        let visibilityKm = myData["current_observation"]["visibility_km"].stringValue
-        let uvIndex = myData["current_observation"]["UV"].stringValue
+        relativeHumidity = myData["current_observation"]["relative_humidity"].stringValue
+        weather = myData["current_observation"]["weather"].stringValue
+        windString = myData["current_observation"]["wind_string"].stringValue
+        windDir = myData["current_observation"]["wind_dir"].stringValue
+        windMph = myData["current_observation"]["wind_mph"].doubleValue
+        windKph = myData["current_observation"]["wind_kph"].doubleValue
+        dewpointF = myData["current_observation"]["dewpoint_f"].doubleValue
+        dewpointC = myData["current_observation"]["dewpoint_C"].doubleValue
+        windchillF = myData["current_observation"]["windchill_f"].stringValue
+        windchillC = myData["current_observation"]["windchill_c"].stringValue
+        feelsLikeF = myData["current_observation"]["feelslike_f"].stringValue
+        feelsLikeC = myData["current_observation"]["feelslike_c"].stringValue
+        visibilityMi = myData["current_observation"]["visibility_mi"].stringValue
+        visibilityKm = myData["current_observation"]["visibility_km"].stringValue
+        uvIndex = myData["current_observation"]["UV"].stringValue
         
         
         
@@ -157,8 +187,8 @@ class DetailViewController: UIViewController, SideBarDelegate
             let hourlyCondition = j["condition"].stringValue
             let hourlyCondition2 = j["wx"].stringValue
             
-            let obj2 = ["civil": hourlyAmPmTime, "hour": hourly24Time, "english": hourlyTempF, "metric": hourlyTempC, "condition": hourlyCondition, "condition2": hourlyCondition2]
-            locations.append(obj2)
+            let obj = ["civil": hourlyAmPmTime, "hour": hourly24Time, "english": hourlyTempF, "metric": hourlyTempC, "condition": hourlyCondition, "condition2": hourlyCondition2]
+            locations.append(obj)
             
             
         }
@@ -175,9 +205,9 @@ class DetailViewController: UIViewController, SideBarDelegate
             let dailyLowC = k["low"]["celsius"].stringValue
             let dailyConditions = k["conditions"].stringValue
             
-            let obj3 = ["weekday": day, "fahrenheit": dailyHighF, "celsius": dailyHighC, "fahrenheit": dailyLowF, "celsius": dailyLowC, "conditions": dailyConditions]
+            let obj2 = ["weekday": day, "fahrenheit": dailyHighF, "celsius": dailyHighC, "fahrenheit": dailyLowF, "celsius": dailyLowC, "conditions": dailyConditions]
             
-            locations.append(obj3)
+            locations.append(obj2)
   
         }
     }
