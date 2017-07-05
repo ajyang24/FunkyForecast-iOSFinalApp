@@ -68,7 +68,6 @@ class DetailViewController: UIViewController, SideBarDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        quoteLabel.text = "Test"
         
         let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
         let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
@@ -107,12 +106,15 @@ class DetailViewController: UIViewController, SideBarDelegate
         settingsView.alpha = 0
       
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About  ⓘ", "Weather"])
+        sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About ⓘ", "Weather"])
         sideBar.delegate = self
         
         locationsView.alpha = 0
         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
         locationLabel.text = fullName
+        quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
+
+        
         
         
 
