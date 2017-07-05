@@ -35,10 +35,12 @@ class DetailViewController: UIViewController, SideBarDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        quoteLabel.text = "Test"
+        currentTemp.text = locations["temp_f"]
         
-        let currentWeatherUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
-        let hourlyWeatherUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
-        let sevenDayForecastUrl = "http://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
+        let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
+        let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
+        let sevenDayForecastUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
         
         if let url1 = URL(string: currentWeatherUrl)
         {
