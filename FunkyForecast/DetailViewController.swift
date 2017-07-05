@@ -12,6 +12,7 @@ class DetailViewController: UIViewController, SideBarDelegate
 {
     var sideBar:SideBar = SideBar()
     var locations = [[String: String]]()
+    var tempF = 0.0
 
     @IBOutlet var moreInfoView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -40,13 +41,11 @@ class DetailViewController: UIViewController, SideBarDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-//        let location = locations[]
         quoteLabel.text = "Test"
-//        currentTemp.text = location["temp_f"]
         
         let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
         let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
-        let sevenDayForecastUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
+        let sevenDayForecastUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Barrington.json"
         
         if let url1 = URL(string: currentWeatherUrl)
         {
@@ -75,54 +74,76 @@ class DetailViewController: UIViewController, SideBarDelegate
             }
         }
 
-        
-//        effect = visualEffectView.effect
-//        visualEffectView.effect = nil
         visualEffectView.alpha = 0
-        aboutView.alpha = 0
-        settingsView.alpha = 0
-//        moreInfoView.layer.cornerRadius = 5
-//        
-//        
+      
         imageView.image = UIImage(named: "image2")
         sideBar = SideBar(sourceView: self.view, menuItems: ["Locations", "Settings", "About", "Weather"])
         sideBar.delegate = self
         
         locationsView.alpha = 0
+        currentTemp.text = String(format: "%.0fº", arguments: [tempF])
 
     }
     
     func parse(myData:JSON)
     {
-        for i in myData["current_observation"].arrayValue
-        {
-            let fullName = i["full"].stringValue
-            let country = i["country"].stringValue
-            let zip = i["zip"].stringValue
-            let latitude = i["latitude"].stringValue
-            let longitude = i["longitude"].stringValue
-            let elevation = i["elevation"].stringValue
-            let tempF = i["temp_f"].stringValue
-            let tempC = i["temp_c"].stringValue
-            let humidity = i["relative_humidity"].stringValue
-            let weather = i["weather"].stringValue
-            let windString = i["wind_string"].stringValue
-            let windDir = i["wind_dir"].stringValue
-            let windMph = i["wind_mph"].stringValue
-            let windKph = i["wind_kph"].stringValue
-            let dewpointF = i["dewpoint_f"].stringValue
-            let dewpointC = i["dewpoint_C"].stringValue
-            let windchillF = i["windchill_f"].stringValue
-            let windchillC = i["windchill_c"].stringValue
-            let feelsLikeF = i["feelslike_f"].stringValue
-            let feelsLikeC = i["feelslike_c"].stringValue
-            let visibilityMi = i["visibility_mi"].stringValue
-            let visibilityKm = i["visibility_km"].stringValue
-            let uvIndex = i["UV"].stringValue
-            
-            let obj = ["full": fullName, "country": country, "zip": zip, "latitude": latitude, "longitude": longitude, "elevation": elevation, "temp_f": tempF, "temp_c": tempC, "relative_humidity": humidity, "weather": weather, "wind_string": windString, "wind_dir": windDir, "wind_mph": windMph, "wind_kph": windKph, "dewpoint_f": dewpointF, "dewpoint_c": dewpointC, "windchill_f": windchillF, "windchill_c": windchillC, "feelslike_f": feelsLikeF, "feelslike_c": feelsLikeC, "visibility_mi": visibilityMi, "visibility_km": visibilityKm, "UV": uvIndex]
-            locations.append(obj)
-        }
+        print(myData["current_observation"]["temp_f"])
+        tempF = myData["current_observation"]["temp_f"].doubleValue
+        let fullName = myData["current_observation"]["full"].stringValue
+        let country = myData["current_observation"]["country"].stringValue
+        let zip = myData["current_observation"]["zip"].stringValue
+        let latitude = myData["current_observation"]["latitude"].stringValue
+        let longitude = myData["current_observation"]["longitude"].stringValue
+        let elevation = myData["current_observation"]["elevation"].stringValue
+        let tempC = myData["current_observation"]["temp_c"].stringValue
+        let humidity = myData["current_observation"]["relative_humidity"].stringValue
+        let weather = myData["current_observation"]["weather"].stringValue
+        let windString = myData["current_observation"]["wind_string"].stringValue
+        let windDir = myData["current_observation"]["wind_dir"].stringValue
+        let windMph = myData["current_observation"]["wind_mph"].stringValue
+        let windKph = myData["current_observation"]["wind_kph"].stringValue
+        let dewpointF = myData["current_observation"]["dewpoint_f"].stringValue
+        let dewpointC = myData["current_observation"]["dewpoint_C"].stringValue
+        let windchillF = myData["current_observation"]["windchill_f"].stringValue
+        let windchillC = myData["current_observation"]["windchill_c"].stringValue
+        let feelsLikeF = myData["current_observation"]["feelslike_f"].stringValue
+        let feelsLikeC = myData["current_observation"]["feelslike_c"].stringValue
+        let visibilityMi = myData["current_observation"]["visibility_mi"].stringValue
+        let visibilityKm = myData["current_observation"]["visibility_km"].stringValue
+        let uvIndex = myData["current_observation"]["UV"].stringValue
+        
+        
+        
+        
+
+//            let fullName = i["full"].stringValue
+//            let country = i["country"].stringValue
+//            let zip = i["zip"].stringValue
+//            let latitude = i["latitude"].stringValue
+//            let longitude = i["longitude"].stringValue
+//            let elevation = i["elevation"].stringValue
+//            let tempF = i["temp_f"].stringValue
+//            let tempC = i["temp_c"].stringValue
+//            let humidity = i["relative_humidity"].stringValue
+//            let weather = i["weather"].stringValue
+//            let windString = i["wind_string"].stringValue
+//            let windDir = i["wind_dir"].stringValue
+//            let windMph = i["wind_mph"].stringValue
+//            let windKph = i["wind_kph"].stringValue
+//            let dewpointF = i["dewpoint_f"].stringValue
+//            let dewpointC = i["dewpoint_C"].stringValue
+//            let windchillF = i["windchill_f"].stringValue
+//            let windchillC = i["windchill_c"].stringValue
+//            let feelsLikeF = i["feelslike_f"].stringValue
+//            let feelsLikeC = i["feelslike_c"].stringValue
+//            let visibilityMi = i["visibility_mi"].stringValue
+//            let visibilityKm = i["visibility_km"].stringValue
+//            let uvIndex = i["UV"].stringValue
+//            print("current temp" + tempF)
+        
+//            let obj = ["full": fullName, "country": country, "zip": zip, "latitude": latitude, "longitude": longitude, "elevation": elevation, "temp_f": tempF, "temp_c": tempC, "relative_humidity": humidity, "weather": weather, "wind_string": windString, "wind_dir": windDir, "wind_mph": windMph, "wind_kph": windKph, "dewpoint_f": dewpointF, "dewpoint_c": dewpointC, "windchill_f": windchillF, "windchill_c": windchillC, "feelslike_f": feelsLikeF, "feelslike_c": feelsLikeC, "visibility_mi": visibilityMi, "visibility_km": visibilityKm, "UV": uvIndex]
+//            locations.append(obj)
+        
     }
     
     func parse2(myData2:JSON)
