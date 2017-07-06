@@ -41,8 +41,9 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     
     
+    @IBOutlet weak var windchill: UILabel!
     @IBOutlet weak var uvIndex: UILabel!
-    @IBOutlet weak var windFeel: UILabel!
+    @IBOutlet weak var dewpoint: UILabel!
     @IBOutlet weak var windSpeed: UILabel!
     @IBOutlet weak var relativeHumidity: UILabel!
     @IBOutlet weak var feelsLike: UILabel!
@@ -115,19 +116,21 @@ class DetailViewController: UIViewController, SideBarDelegate
         sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
         sideBar.delegate = self
         
-        
-        locationsView.alpha = 0
+        // All information filled
         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
         locationLabel.text = fullName
         quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
         weatherName.text = weather
-        windDirection.text = windDir
-        visibility.text = visibilityMi
-        feelsLike.text = feelsLikeF
-        relativeHumidity.text = humidity
-        windSpeed.text = String(feelsLikeF)
-        windFeel.text = windString
-        uvIndex.text = uv
+        
+        
+        windDirection.text = "Wind Direction: " + windDir
+        visibility.text = "Visibility: " + visibilityMi
+        feelsLike.text = "It Feels Like: " + feelsLikeF
+        relativeHumidity.text = "Relative Humidity: " + humidity
+        windSpeed.text = "Wind Speed: " + String(windMph)
+        dewpoint.text = "Dewpoint: " + String(dewpointF)
+        uvIndex.text! = "UV Index: " + uv
+        windchill.text = "Windchill: " + windchillF
         
 
         
