@@ -133,7 +133,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         // All information filled
         
-        currentTemp.text = String(format: "%.0fº", arguments: [tempF])
+        currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
         print(tempF)
         
                 locationLabel.text = fullName
@@ -143,13 +143,19 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         windDirection.text = "Wind Direction: " + windDir
         visibility.text = "Visibility: " + visibilityMi + " Miles"
-        feelsLike.text = "It Feels Like: " + feelsLikeF + "º"
+        feelsLike.text = "It Feels Like: " + feelsLikeF + "ºF"
         relativeHumidity.text = "Relative Humidity: " + humidity
         windSpeed.text = "Wind Speed: " + String(windMph) + " Mph"
-        dewpoint.text = "Dewpoint: " + String(dewpointF) + "º"
+        dewpoint.text = String(format: "Dewpoint: %.0fºF", arguments: [dewpointF])
         uvIndex.text! = "UV Index: " + uv
-        windchill.text = "Windchill: " + windchillF + "º"
-        
+        if windchillF == "NA"
+        {
+            windchill.text = "Windchill: " + "NA"
+        }
+        else
+        {
+            windchill.text = "Windchill: " + windchillF + "ºF"
+        }
 
         weatherIcon.image = UIImage(named: weather)
         
@@ -161,22 +167,46 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBAction func temperatureUnitSwitch(_ sender: Any)
     {
         
-        if currentTemp.text ==  String(format: "%.0fº", arguments: [tempF])
+        if currentTemp.text ==  String(format: "%.0fºF", arguments: [tempF])
         {
-            currentTemp.text = String(format: "%.0fº", arguments: [tempC])
-            dewpoint.text = "Dewpoint: " + String(dewpointC) + "º"
-            windchill.text = "Windchill: " + windchillC + "º"
-            feelsLike.text = "It Feels Like: " + feelsLikeC + "º"
+            currentTemp.text = String(format: "%.0fºC", arguments: [tempC])
+            dewpoint.text = String(format: "Dewpoint: %.0fºC", arguments: [dewpointC])
+            feelsLike.text = "It Feels Like: " + feelsLikeC + "ºC"
+            if windchillC == "NA"
+            {
+                windchill.text = "Windchill: " + "NA"
+            }
+            else
+            {
+                windchill.text = "Windchill: " + windchillC + "ºC"
+            }
         }
-        else if currentTemp.text == String(format: "%.0fº", arguments: [tempC])
+            
+            
+            
+            
+            
+        else if currentTemp.text == String(format: "%.0fºC", arguments: [tempC])
         {
-         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
-            dewpoint.text = "Dewpoint: " + String(dewpointF) + "º"
-            windchill.text = "Windchill: " + windchillF + "º"
-            feelsLike.text = "It Feels Like: " + feelsLikeF + "º"
+            currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
+            dewpoint.text = String(format: "Dewpoint: %.0fºF", arguments: [dewpointF])
+            windchill.text = "Windchill: " + windchillF + "ºF"
+            feelsLike.text = "It Feels Like: " + feelsLikeF + "ºF"
+            if windchillC == "NA"
+            {
+                windchill.text = "Windchill: " + "NA"
+            }
+            else
+            {
+                windchill.text = "Windchill: " + windchillF + "ºF"
+            }
         }
         
     }
+    
+    
+    
+    
     
     @IBAction func distanceUnitSwitch(_ sender: Any)
     {
@@ -185,6 +215,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             visibility.text = "Visibility: " + visibilityKm + " Kilometers"
             windSpeed.text = "Wind Speed: " + String(windKph) + " Kph"
         }
+            
+            
+            
         else if visibility.text == "Visibility: " + visibilityKm + " Kilometers"
         {
             visibility.text = "Visibility: " + visibilityMi + " Miles"
