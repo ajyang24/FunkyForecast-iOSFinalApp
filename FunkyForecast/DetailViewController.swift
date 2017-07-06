@@ -53,6 +53,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
     @IBOutlet var moreInfoView: UIView!
     @IBOutlet weak var imageView: UIImageView!
+    
+    
 
     @IBOutlet weak var settingsView: UIView!
     
@@ -130,20 +132,23 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         sideBar.delegate = self
         
         // All information filled
+        
         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
-        locationLabel.text = fullName
+        print(tempF)
+        
+                locationLabel.text = fullName
         quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
         weatherName.text = weather
         
         
         windDirection.text = "Wind Direction: " + windDir
-        visibility.text = "Visibility: " + visibilityMi
-        feelsLike.text = "It Feels Like: " + feelsLikeF
+        visibility.text = "Visibility: " + visibilityMi + " Miles"
+        feelsLike.text = "It Feels Like: " + feelsLikeF + "º"
         relativeHumidity.text = "Relative Humidity: " + humidity
-        windSpeed.text = "Wind Speed: " + String(windMph)
-        dewpoint.text = "Dewpoint: " + String(dewpointF)
+        windSpeed.text = "Wind Speed: " + String(windMph) + " Mph"
+        dewpoint.text = "Dewpoint: " + String(dewpointF) + "º"
         uvIndex.text! = "UV Index: " + uv
-        windchill.text = "Windchill: " + windchillF
+        windchill.text = "Windchill: " + windchillF + "º"
         
 
         weatherIcon.image = UIImage(named: weather)
@@ -151,6 +156,46 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
 
     }
+    
+    
+    @IBAction func temperatureUnitSwitch(_ sender: Any)
+    {
+        
+        if currentTemp.text ==  String(format: "%.0fº", arguments: [tempF])
+        {
+            currentTemp.text = String(format: "%.0fº", arguments: [tempC])
+            dewpoint.text = "Dewpoint: " + String(dewpointC) + "º"
+            windchill.text = "Windchill: " + windchillC + "º"
+            feelsLike.text = "It Feels Like: " + feelsLikeC + "º"
+        }
+        else if currentTemp.text == String(format: "%.0fº", arguments: [tempC])
+        {
+         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
+            dewpoint.text = "Dewpoint: " + String(dewpointF) + "º"
+            windchill.text = "Windchill: " + windchillF + "º"
+            feelsLike.text = "It Feels Like: " + feelsLikeF + "º"
+        }
+        
+    }
+    
+    @IBAction func distanceUnitSwitch(_ sender: Any)
+    {
+        if visibility.text == "Visibility: " + visibilityMi + " Miles"
+        {
+            visibility.text = "Visibility: " + visibilityKm + " Kilometers"
+            windSpeed.text = "Wind Speed: " + String(windKph) + " Kph"
+        }
+        else if visibility.text == "Visibility: " + visibilityKm + " Kilometers"
+        {
+            visibility.text = "Visibility: " + visibilityMi + " Miles"
+            windSpeed.text = "Wind Speed: " + String(windMph)  + " Mph"
+        }
+
+    }
+    
+    
+    
+    
     
     func parse(myData:JSON)
     {
@@ -169,7 +214,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         windMph = myData["current_observation"]["wind_mph"].doubleValue
         windKph = myData["current_observation"]["wind_kph"].doubleValue
         dewpointF = myData["current_observation"]["dewpoint_f"].doubleValue
-        dewpointC = myData["current_observation"]["dewpoint_C"].doubleValue
+        dewpointC = myData["current_observation"]["dewpoint_c"].doubleValue
         windchillF = myData["current_observation"]["windchill_f"].stringValue
         windchillC = myData["current_observation"]["windchill_c"].stringValue
         feelsLikeF = myData["current_observation"]["feelslike_f"].stringValue
