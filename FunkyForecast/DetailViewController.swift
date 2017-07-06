@@ -35,7 +35,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     var visibilityMi = ""
     var visibilityKm = ""
     var uv = ""
-    
+    var locationManager = CLLocationManager()
     
     
     
@@ -75,6 +75,17 @@ class DetailViewController: UIViewController, SideBarDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        locationManager.delegate = self
+        
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+        
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        
         
         let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(town).json"
         let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(town).json"
