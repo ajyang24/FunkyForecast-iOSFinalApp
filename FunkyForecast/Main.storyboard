@@ -142,6 +142,55 @@
                                                                         <action selector="dismissButtonPressed:" destination="Ht9-M8-kxZ" eventType="touchUpInside" id="gDo-AN-N4g"/>
                                                                     </connections>
                                                                 </button>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wind Direction: West" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Wd-0r-A5t">
+                                                                    <rect key="frame" x="0.0" y="102" width="232" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Visibility: 10.0 Mi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAH-Fb-aZa">
+                                                                    <rect key="frame" x="0.0" y="72" width="232" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feels Likes: 91ºF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1L-y8-YF5">
+                                                                    <rect key="frame" x="0.0" y="42" width="232" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Relative Humidity: 65" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxX-VJ-2VV">
+                                                                    <rect key="frame" x="0.0" y="132" width="232" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wind Speed: 25 mph" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2O-qb-ROJ">
+                                                                    <rect key="frame" x="0.0" y="162" width="232" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wind Feel: Calm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Nw-zN-1eR">
+                                                                    <rect key="frame" x="0.0" y="192" width="232" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UV Index = 7" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUj-5i-SOf">
+                                                                    <rect key="frame" x="0.0" y="222" width="232" height="28"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
@@ -182,30 +231,30 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About Saidrew LLC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhY-bp-qUz">
-                                                        <rect key="frame" x="50" y="0.0" width="260" height="72"/>
+                                                        <rect key="frame" x="30" y="0.0" width="260" height="72"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ck9-iD-v0l">
-                                                        <rect key="frame" x="33" y="80" width="255" height="713"/>
+                                                        <rect key="frame" x="8" y="70" width="302" height="713"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <string key="text">Saidrew LLC is a young company originally founded by Sai Girap and Andrew Yang on July 4, 2017. Both Andrew and Sai live in Barrington, Illinois and are freshman in Barrington High School. They both were new to programming and had started learning Swift in June 2017. Both young developers are ambitious and aim to become leaders in technology. With help from their great teacher Brian Mathien, they made this weather app, Funky Forecast, which was designed to be a funny way to tell the weather using all of the coding skills that they had aquired over the summer. The weather information API was taken courtesy of the one and only Weather Underground.</string>
+                                                        <mutableString key="text">Saidrew LLC is a young company originally founded by Sai Girap and Andrew Yang on July 4, 2017. Both Andrew and Sai live in Barrington, Illinois and are freshman in Barrington High School. They both were new to programming and had started learning Swift in June 2017. Both young developers are ambitious and aim to become leaders in technology. With help from their great teacher Brian Mathien, they made this weather app, Funky Forecast, which was designed to be a funny way to tell the weather using all of the coding skills that they had aquired over the summer. The weather information API was taken courtesy of the one and only Weather Underground.</mutableString>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wu" translatesAutoresizingMaskIntoConstraints="NO" id="lZR-Qq-Kh7">
-                                                        <rect key="frame" x="0.0" y="714" width="320" height="241"/>
+                                                        <rect key="frame" x="80" y="366" width="160" height="120"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="DBV-9W-1TA">
-                                                <rect key="frame" x="16" y="21" width="27" height="19"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="swipeRight" translatesAutoresizingMaskIntoConstraints="NO" id="DBV-9W-1TA">
+                                                <rect key="frame" x="16" y="21" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
@@ -241,14 +290,22 @@
                     <connections>
                         <outlet property="aboutView" destination="Fcf-gg-C6c" id="er1-sA-rJB"/>
                         <outlet property="currentTemp" destination="kxJ-yY-4JS" id="xhN-Mu-rWD"/>
+                        <outlet property="feelsLike" destination="R1L-y8-YF5" id="38T-JG-YH8"/>
                         <outlet property="imageView" destination="7DW-Ph-ZPS" id="BFX-Id-HjR"/>
                         <outlet property="locationLabel" destination="gNu-2b-noC" id="tbH-Ue-Aup"/>
                         <outlet property="locationsView" destination="8Vl-Mx-dEN" id="Ig7-fH-jJD"/>
                         <outlet property="moreInfoView" destination="HFs-3v-KIJ" id="QP1-W2-NZf"/>
                         <outlet property="quoteLabel" destination="2Pv-Eg-maw" id="KBP-tl-hAs"/>
+                        <outlet property="relativeHumidity" destination="dxX-VJ-2VV" id="fmG-Au-nhc"/>
                         <outlet property="settingsView" destination="ChS-fi-is5" id="SyC-C4-LeC"/>
+                        <outlet property="swipeRightImage" destination="DBV-9W-1TA" id="Pns-2z-dq3"/>
+                        <outlet property="uvIndex" destination="VUj-5i-SOf" id="HLQ-CQ-B26"/>
+                        <outlet property="visibility" destination="pAH-Fb-aZa" id="J35-5i-Xph"/>
                         <outlet property="visualEffectView" destination="MfD-iq-eva" id="i3c-Hh-BIy"/>
                         <outlet property="weatherName" destination="vEo-BH-mIA" id="mz8-k5-ouB"/>
+                        <outlet property="windDirection" destination="3Wd-0r-A5t" id="G1G-Cl-wkV"/>
+                        <outlet property="windFeel" destination="3Nw-zN-1eR" id="KnO-Es-xUW"/>
+                        <outlet property="windSpeed" destination="x2O-qb-ROJ" id="pXm-kU-dFy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqc-6i-NPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -260,7 +317,7 @@
         <image name="Sunset Sea 15 iPhone 6 Wallpapers" width="750" height="1334"/>
         <image name="cloudwindy" width="192" height="192"/>
         <image name="locationicon" width="512" height="512"/>
-        <image name="menu" width="512" height="512"/>
+        <image name="swipeRight" width="200" height="200"/>
         <image name="wu" width="1104" height="658"/>
     </resources>
 </document>

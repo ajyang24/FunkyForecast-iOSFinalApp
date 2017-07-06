@@ -17,7 +17,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     var weather = ""
     var dewpointF = 0.0
     var dewpointC = 0.0
-    var relativeHumidity = ""
+    var humidity = ""
     var fullName = ""
     var country = ""
     var zip = ""
@@ -34,13 +34,20 @@ class DetailViewController: UIViewController, SideBarDelegate
     var feelsLikeC = ""
     var visibilityMi = ""
     var visibilityKm = ""
-    var uvIndex = ""
+    var uv = ""
     
     
     
     
     
     
+    @IBOutlet weak var uvIndex: UILabel!
+    @IBOutlet weak var windFeel: UILabel!
+    @IBOutlet weak var windSpeed: UILabel!
+    @IBOutlet weak var relativeHumidity: UILabel!
+    @IBOutlet weak var feelsLike: UILabel!
+    @IBOutlet weak var visibility: UILabel!
+    @IBOutlet weak var windDirection: UILabel!
 
     @IBOutlet var moreInfoView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -52,6 +59,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     @IBOutlet weak var locationsView: UIView!
 
+    @IBOutlet weak var swipeRightImage: UIImageView!
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var currentTemp: UILabel!
     @IBOutlet weak var weatherName: UILabel!
@@ -107,11 +115,19 @@ class DetailViewController: UIViewController, SideBarDelegate
         sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
         sideBar.delegate = self
         
+        
         locationsView.alpha = 0
         currentTemp.text = String(format: "%.0fº", arguments: [tempF])
         locationLabel.text = fullName
         quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
         weatherName.text = weather
+        windDirection.text = windDir
+        visibility.text = visibilityMi
+        feelsLike.text = feelsLikeF
+        relativeHumidity.text = humidity
+        windSpeed.text = String(feelsLikeF)
+        windFeel.text = windString
+        uvIndex.text = uv
         
 
         
@@ -130,7 +146,7 @@ class DetailViewController: UIViewController, SideBarDelegate
         elevation = myData["current_observation"]["display_location"]["elevation"].stringValue
         tempC = myData["current_observation"]["temp_c"].doubleValue
         tempF = myData["current_observation"]["temp_f"].doubleValue
-        relativeHumidity = myData["current_observation"]["relative_humidity"].stringValue
+        humidity = myData["current_observation"]["relative_humidity"].stringValue
         weather = myData["current_observation"]["weather"].stringValue
         windString = myData["current_observation"]["wind_string"].stringValue
         windDir = myData["current_observation"]["wind_dir"].stringValue
@@ -144,7 +160,7 @@ class DetailViewController: UIViewController, SideBarDelegate
         feelsLikeC = myData["current_observation"]["feelslike_c"].stringValue
         visibilityMi = myData["current_observation"]["visibility_mi"].stringValue
         visibilityKm = myData["current_observation"]["visibility_km"].stringValue
-        uvIndex = myData["current_observation"]["UV"].stringValue
+        uv = myData["current_observation"]["UV"].stringValue
         
         
         
@@ -264,6 +280,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     
     func sideBarDidSelectButtonAtIndex(_ index: Int) {
+        
         if index == 0
         {
             aboutView.alpha = 0
