@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "weather-drizzle-day.png",
+      "filename" : "weather-clear.png",
       "scale" : "1x"
     },
     {
