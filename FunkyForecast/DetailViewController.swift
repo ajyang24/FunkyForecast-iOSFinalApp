@@ -52,6 +52,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     @IBOutlet weak var locationsView: UIView!
 
+    @IBOutlet weak var swipeRightImage: UIImageView!
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var currentTemp: UILabel!
     @IBOutlet weak var weatherName: UILabel!
@@ -264,6 +265,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     
     func sideBarDidSelectButtonAtIndex(_ index: Int) {
+        
         if index == 0
         {
             aboutView.alpha = 0
