@@ -60,6 +60,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     
     @IBOutlet weak var locationsView: UIView!
 
+    @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var swipeRightImage: UIImageView!
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var currentTemp: UILabel!
@@ -67,8 +68,8 @@ class DetailViewController: UIViewController, SideBarDelegate
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
     
-    var state = "IL"
-    var town = "Barrington"
+    var state = "TX"
+    var town = "Dallas"
     
     var effect:UIVisualEffect!
     
@@ -133,7 +134,7 @@ class DetailViewController: UIViewController, SideBarDelegate
         windchill.text = "Windchill: " + windchillF
         
 
-        
+        weatherIcon.image = UIImage(named: weather)
         
         
 
