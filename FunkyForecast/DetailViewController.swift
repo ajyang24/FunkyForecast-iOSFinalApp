@@ -11,6 +11,24 @@ import CoreLocation
 
 class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate
 {
+    struct AppUtility {
+        
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+            
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = orientation
+            }
+        }
+        
+        /// OPTIONAL Added method to adjust lock and rotate to the desired orientation
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
+            
+            self.lockOrientation(orientation)
+            
+            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+        }
+        
+    }
     var sideBar:SideBar = SideBar()
     var locations = [[String: String]]()
     var tempF = 0.0
@@ -163,6 +181,22 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AppUtility.lockOrientation(.portrait)
+        // Or to rotate and lock
+        // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        
+        // Don't forget to reset when view is being removed
+        AppUtility.lockOrientation(.all)
+    }
     
     @IBAction func temperatureUnitSwitch(_ sender: Any)
     {

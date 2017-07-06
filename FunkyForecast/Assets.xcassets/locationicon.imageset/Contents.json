@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "map-location-service-glyph-512.png",
+      "filename" : "locationIcon.png",
       "scale" : "1x"
     },
     {
