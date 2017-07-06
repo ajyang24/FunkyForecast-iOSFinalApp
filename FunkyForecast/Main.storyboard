@@ -290,14 +290,22 @@
                     <connections>
                         <outlet property="aboutView" destination="Fcf-gg-C6c" id="er1-sA-rJB"/>
                         <outlet property="currentTemp" destination="kxJ-yY-4JS" id="xhN-Mu-rWD"/>
+                        <outlet property="feelsLike" destination="R1L-y8-YF5" id="38T-JG-YH8"/>
                         <outlet property="imageView" destination="7DW-Ph-ZPS" id="BFX-Id-HjR"/>
                         <outlet property="locationLabel" destination="gNu-2b-noC" id="tbH-Ue-Aup"/>
                         <outlet property="locationsView" destination="8Vl-Mx-dEN" id="Ig7-fH-jJD"/>
                         <outlet property="moreInfoView" destination="HFs-3v-KIJ" id="QP1-W2-NZf"/>
                         <outlet property="quoteLabel" destination="2Pv-Eg-maw" id="KBP-tl-hAs"/>
+                        <outlet property="relativeHumidity" destination="dxX-VJ-2VV" id="fmG-Au-nhc"/>
                         <outlet property="settingsView" destination="ChS-fi-is5" id="SyC-C4-LeC"/>
+                        <outlet property="swipeRightImage" destination="DBV-9W-1TA" id="Pns-2z-dq3"/>
+                        <outlet property="uvIndex" destination="VUj-5i-SOf" id="HLQ-CQ-B26"/>
+                        <outlet property="visibility" destination="pAH-Fb-aZa" id="J35-5i-Xph"/>
                         <outlet property="visualEffectView" destination="MfD-iq-eva" id="i3c-Hh-BIy"/>
                         <outlet property="weatherName" destination="vEo-BH-mIA" id="mz8-k5-ouB"/>
+                        <outlet property="windDirection" destination="3Wd-0r-A5t" id="G1G-Cl-wkV"/>
+                        <outlet property="windFeel" destination="3Nw-zN-1eR" id="KnO-Es-xUW"/>
+                        <outlet property="windSpeed" destination="x2O-qb-ROJ" id="pXm-kU-dFy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqc-6i-NPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
