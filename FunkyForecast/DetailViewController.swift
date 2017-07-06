@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class DetailViewController: UIViewController, SideBarDelegate
+class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate
 {
     var sideBar:SideBar = SideBar()
     var locations = [[String: String]]()
@@ -79,14 +80,14 @@ class DetailViewController: UIViewController, SideBarDelegate
         
         locationManager.delegate = self
         
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
+        if CLLocationManager.authorizationStatus() == .notDetermined {
             self.locationManager.requestWhenInUseAuthorization()
         }
         
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
-        
+    
         
         let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(town).json"
         let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(town).json"
@@ -250,7 +251,7 @@ class DetailViewController: UIViewController, SideBarDelegate
     func animateIn()
     {
 
-        moreInfoView.layer.cornerRadius = 5
+        moreInfoView.layer.cornerRadius = 10
         
         self.view.addSubview(moreInfoView)
         moreInfoView.center = self.view.center
