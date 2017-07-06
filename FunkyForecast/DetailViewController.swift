@@ -98,6 +98,14 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     {
         super.viewDidLoad()
         
+        func shouldAutorotate() -> Bool {
+            return false
+        }
+        
+        func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+            return UIInterfaceOrientationMask.portrait
+        }
+        
       /*  locationManager.delegate = self
         
         if CLLocationManager.authorizationStatus() == .notDetermined {
