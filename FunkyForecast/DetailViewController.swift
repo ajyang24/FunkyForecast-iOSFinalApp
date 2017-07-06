@@ -7,28 +7,27 @@
 //
 
 import UIKit
+import MapKit
 import CoreLocation
 
 class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate
 {
-    struct AppUtility {
-        
-        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+    
+    
+    struct AppUtility
+    {
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask)
+        {
             
-            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            if let delegate = UIApplication.shared.delegate as? AppDelegate
+            {
                 delegate.orientationLock = orientation
             }
         }
-        
-        /// OPTIONAL Added method to adjust lock and rotate to the desired orientation
-        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
-            
-            self.lockOrientation(orientation)
-            
-            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
-        }
-        
     }
+    
+    
+    
     var sideBar:SideBar = SideBar()
     var locations = [[String: String]]()
     var tempF = 0.0
@@ -54,7 +53,6 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var visibilityMi = ""
     var visibilityKm = ""
     var uv = ""
-   // var locationManager = CLLocationManager()
     
     
     
@@ -89,33 +87,59 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
     
-    var state = "TX"
-    var town = "Dallas"
+    
     
     var effect:UIVisualEffect!
+    
+    let manager = CLLocationManager()
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        let location = locations[0]
+        
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        
+        
+        CLGeocoder().reverseGeocodeLocation(location) { (placemark, error) in
+            if error != nil
+            {
+                print ("THERE WAS AN ERROR")
+            }
+            else
+            {
+                if let place = placemark?[0]
+                {
+                    if let checker = place.subThoroughfare
+                    {
+                        self.locationLabel.text = "\(place.locality!), \(place.administrativeArea!)"
+                        self.locationInput = place
+                        
+                    }
+                }
+            }
+        }
+        
+        
+    }
+    
+    var locationInput = CLPlacemark()
+
+    
+    var state = ""
+    var town = ""
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        state = "\(locationInput.administrativeArea)"
+        town = "\(locationInput.locality)"
         
-        func shouldAutorotate() -> Bool {
-            return false
-        }
-        
-        func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-            return UIInterfaceOrientationMask.portrait
-        }
-        
-      /*  locationManager.delegate = self
-        
-        if CLLocationManager.authorizationStatus() == .notDetermined {
-            self.locationManager.requestWhenInUseAuthorization()
-        }
-        
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-       */ 
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
         
         let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(town).json"
         let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(town).json"
@@ -162,7 +186,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
         print(tempF)
         
-                locationLabel.text = fullName
+       //locationLabel.text = fullName
         quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
         weatherName.text = weather
         
