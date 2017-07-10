@@ -28,6 +28,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     
     
+
     var sideBar:SideBar = SideBar()
     var locations = [[String: String]]()
     var tempF = 0.0
