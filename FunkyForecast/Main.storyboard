@@ -437,7 +437,7 @@
         <image name="Sunset Sea 15 iPhone 6 Wallpapers" width="750" height="1334"/>
         <image name="backgroundTestImage2" width="640" height="1136"/>
         <image name="locationicon" width="256" height="256"/>
-        <image name="swipeRight2" width="700" height="700"/>
+        <image name="swipeRight" width="200" height="200"/>
         <image name="wu" width="1104" height="658"/>
     </resources>
 </document>
