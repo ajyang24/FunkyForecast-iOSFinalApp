@@ -22,7 +22,7 @@ extension UIViewController {
     }
 }
 
-class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate
+class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource
 {
     
     
@@ -146,6 +146,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var currentWeatherURL = ""
     var hourlyWeatherURL = ""
     var sevenDayForecastURL = ""
+    var imageArray = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
     
     
     
@@ -233,6 +234,18 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
+        
+        cell.imgImage.image = imageArray[indexPath.row]
+        
+        return cell
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -241,6 +254,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
         
     }
+    
+    
     
     
     
