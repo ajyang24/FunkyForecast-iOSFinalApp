@@ -477,6 +477,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBAction func dismissButtonPressed(_ sender: Any) {
         animateOut()
     }
+    @IBAction func testButtonForScrollView(_ sender: Any) {
+        print("Epic")
+    }
     
     
     func sideBarDidSelectButtonAtIndex(_ index: Int) {
