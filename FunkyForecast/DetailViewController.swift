@@ -10,6 +10,18 @@ import UIKit
 import MapKit
 import CoreLocation
 
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
 class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate
 {
     
@@ -70,7 +82,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet var moreInfoView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var stateLabel: UITextField!
     
+    @IBOutlet weak var townLabel: UITextField!
 
     @IBOutlet weak var settingsView: UIView!
     
@@ -87,7 +101,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
     
-    
+    var state = ""
+    var town = ""
+    var townURL = ""
     
     var effect:UIVisualEffect!
     
@@ -111,41 +127,46 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             {
                 if let place = placemark?[0]
                 {
-                    if let checker = place.subThoroughfare
+                    if place.subThoroughfare != nil
                     {
                         self.locationLabel.text = "\(place.locality!), \(place.administrativeArea!)"
-                        self.locationInput = place
+                        self.state = place.administrativeArea!
+                        self.town = place.locality!
+                        self.townURL = self.town.replacingOccurrences(of: " ", with: "_")
                         
+
                     }
                 }
             }
         }
-        
-        
     }
     
-    var locationInput = CLPlacemark()
 
+    var currentWeatherURL = ""
+    var hourlyWeatherURL = ""
+    var sevenDayForecastURL = ""
     
-    var state = ""
-    var town = ""
+    
+    
+    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        state = "\(locationInput.administrativeArea)"
-        town = "\(locationInput.locality)"
+        
         
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-        let currentWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(town).json"
-        let hourlyWeatherUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(town).json"
-        let sevenDayForecastUrl = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(town).json"
+        print(state)
         
-        if let url1 = URL(string: currentWeatherUrl)
+        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(self.townURL).json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(self.townURL).json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(self.townURL).json"
+        
+        if let url1 = URL(string: currentWeatherURL)
         {
             if let myData = try? Data(contentsOf: url1, options: [])
             {
@@ -154,7 +175,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             }
         }
         
-        if let url2 = URL(string: hourlyWeatherUrl)
+        if let url2 = URL(string: hourlyWeatherURL)
         {
             if let myData2 = try? Data(contentsOf: url2, options: [])
             {
@@ -163,7 +184,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             }
         }
         
-        if let url3 = URL(string: sevenDayForecastUrl)
+        if let url3 = URL(string: sevenDayForecastURL)
         {
             if let myData3 = try? Data(contentsOf: url3, options: [])
             {
@@ -181,12 +202,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
         sideBar.delegate = self
         
-        // All information filled
-        
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
-        print(tempF)
         
-       //locationLabel.text = fullName
+        
+        //locationLabel.text = fullName
         quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
         weatherName.text = weather
         
@@ -206,10 +225,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         {
             windchill.text = "Windchill: " + windchillF + "ºF"
         }
-
+        
         weatherIcon.image = UIImage(named: weather)
-        
-        
+        self.hideKeyboardWhenTappedAround()
+
 
     }
     
@@ -221,6 +240,59 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
         
     }
+    
+    
+    
+    
+    @IBAction func enterLocationButton(_ sender: Any)
+    {
+        let string = stateLabel.text! + townLabel.text!
+        let character = " "
+        if string.contains(character)
+        {
+            let myAlert = UIAlertController(title: "ERROR", message: "Your information may have been fomatted incorrectly.", preferredStyle: UIAlertControllerStyle.alert)
+            let dismissButton = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+            myAlert.addAction(dismissButton)
+            present(myAlert, animated: true, completion: nil)
+        }
+        else
+        {
+            locationLabel.text = townLabel.text! + ", " + stateLabel.text!
+            self.currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(stateLabel.text)/\(townLabel.text).json"
+            self.hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(stateLabel.text)/\(townLabel.text).json"
+            self.sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(stateLabel.text)/\(townLabel.text).json"
+            
+            if let url1 = URL(string: currentWeatherURL)
+            {
+                if let myData = try? Data(contentsOf: url1, options: [])
+                {
+                    let json = JSON(myData)
+                    parse(myData: json)
+                }
+            }
+            
+            if let url2 = URL(string: hourlyWeatherURL)
+            {
+                if let myData2 = try? Data(contentsOf: url2, options: [])
+                {
+                    let json = JSON(myData2)
+                    parse2(myData2: json)
+                }
+            }
+            
+            if let url3 = URL(string: sevenDayForecastURL)
+            {
+                if let myData3 = try? Data(contentsOf: url3, options: [])
+                {
+                    let json = JSON(myData3)
+                    parse3(myData3: json)
+                }
+            }
+            
+            self.hideKeyboardWhenTappedAround()
+        }
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool)
     {
@@ -322,38 +394,6 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         visibilityKm = myData["current_observation"]["visibility_km"].stringValue
         uv = myData["current_observation"]["UV"].stringValue
         
-        
-        
-        
-
-//            let fullName = i["full"].stringValue
-//            let country = i["country"].stringValue
-//            let zip = i["zip"].stringValue
-//            let latitude = i["latitude"].stringValue
-//            let longitude = i["longitude"].stringValue
-//            let elevation = i["elevation"].stringValue
-//            let tempF = i["temp_f"].stringValue
-//            let tempC = i["temp_c"].stringValue
-//            let humidity = i["relative_humidity"].stringValue
-//            let weather = i["weather"].stringValue
-//            let windString = i["wind_string"].stringValue
-//            let windDir = i["wind_dir"].stringValue
-//            let windMph = i["wind_mph"].stringValue
-//            let windKph = i["wind_kph"].stringValue
-//            let dewpointF = i["dewpoint_f"].stringValue
-//            let dewpointC = i["dewpoint_C"].stringValue
-//            let windchillF = i["windchill_f"].stringValue
-//            let windchillC = i["windchill_c"].stringValue
-//            let feelsLikeF = i["feelslike_f"].stringValue
-//            let feelsLikeC = i["feelslike_c"].stringValue
-//            let visibilityMi = i["visibility_mi"].stringValue
-//            let visibilityKm = i["visibility_km"].stringValue
-//            let uvIndex = i["UV"].stringValue
-//            print("current temp" + tempF)
-        
-//            let obj = ["full": fullName, "country": country, "zip": zip, "latitude": latitude, "longitude": longitude, "elevation": elevation, "temp_f": tempF, "temp_c": tempC, "relative_humidity": humidity, "weather": weather, "wind_string": windString, "wind_dir": windDir, "wind_mph": windMph, "wind_kph": windKph, "dewpoint_f": dewpointF, "dewpoint_c": dewpointC, "windchill_f": windchillF, "windchill_c": windchillC, "feelslike_f": feelsLikeF, "feelslike_c": feelsLikeC, "visibility_mi": visibilityMi, "visibility_km": visibilityKm, "UV": uvIndex]
-//            locations.append(obj)
-        
     }
     
     func parse2(myData2:JSON)
@@ -409,22 +449,22 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             self.effect = self.visualEffectView.effect
             self.visualEffectView.effect = nil
             self.visualEffectView.effect = self.effect
-            self.visualEffectView.alpha = 1
             self.moreInfoView.alpha = 1
             self.moreInfoView.transform = CGAffineTransform.identity
-
         }
+        visualEffectView.alpha = 1
+
     }
     
-    func animateOut () {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.moreInfoView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            self.moreInfoView.alpha = 0
+    func animateOut()
+    {
+        UIView.animate(withDuration: 0.5, animations:
+            {self.moreInfoView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.visualEffectView.alpha = 0
-
-            
-        }) { (success:Bool) in
+            self.moreInfoView.alpha = 0})
+        { (success:Bool) in
             self.moreInfoView.removeFromSuperview()
+            
         }
     }
     

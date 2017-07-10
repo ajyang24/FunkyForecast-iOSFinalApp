@@ -11,7 +11,6 @@ import UIKit
 
 class ViewController: UIViewController
 {
-    var sideBar:SideBar = SideBar()
 
     
 
