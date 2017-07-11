@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -365,8 +365,10 @@
                     <connections>
                         <outlet property="aboutView" destination="Fcf-gg-C6c" id="er1-sA-rJB"/>
                         <outlet property="currentTemp" destination="kxJ-yY-4JS" id="xhN-Mu-rWD"/>
+                        <outlet property="dailyCollectionView" destination="3Wm-q8-mIf" id="Haz-g5-qRh"/>
                         <outlet property="dewpoint" destination="3Nw-zN-1eR" id="zPD-Im-CGB"/>
                         <outlet property="feelsLike" destination="R1L-y8-YF5" id="38T-JG-YH8"/>
+                        <outlet property="hourlyCollectionView" destination="j4s-S6-80w" id="3aZ-rs-5RB"/>
                         <outlet property="imageView" destination="7DW-Ph-ZPS" id="BFX-Id-HjR"/>
                         <outlet property="locationLabel" destination="gNu-2b-noC" id="tbH-Ue-Aup"/>
                         <outlet property="locationsView" destination="8Vl-Mx-dEN" id="Ig7-fH-jJD"/>
