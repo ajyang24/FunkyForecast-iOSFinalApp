@@ -10,10 +10,10 @@
 		641920531F05DCC5003F84D1 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641920511F05DCC5003F84D1 /* SideBar.swift */; };
 		641920541F05DCC5003F84D1 /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641920521F05DCC5003F84D1 /* SideBarTableViewController.swift */; };
 		6467E0821F0EAEB300EACCBA /* SwiftyJSON-1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */; };
-		6467E0841F15321400EACCBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6467E0831F15321400EACCBA /* Main.storyboard */; };
 		E51E15E31F13B8B90052D6AF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E15E21F13B8B90052D6AF /* ImageCollectionViewCell.swift */; };
 		E51E15E51F13ED650052D6AF /* Image2CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E15E41F13ED650052D6AF /* Image2CollectionViewCell.swift */; };
 		E539A76F1F056EC900F5FDAB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539A76E1F056EC900F5FDAB /* DetailViewController.swift */; };
+		E561C8B81F15361A00101239 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E561C8B71F15361A00101239 /* Main.storyboard */; };
 		E5F3109B1F041FB4007867FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F3109A1F041FB4007867FB /* AppDelegate.swift */; };
 		E5F3109D1F041FB4007867FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F3109C1F041FB4007867FB /* ViewController.swift */; };
 		E5F310A21F041FB4007867FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5F310A11F041FB4007867FB /* Assets.xcassets */; };
@@ -43,10 +43,10 @@
 		641920511F05DCC5003F84D1 /* SideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		641920521F05DCC5003F84D1 /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
 		6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftyJSON-1.swift"; sourceTree = "<group>"; };
-		6467E0831F15321400EACCBA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E51E15E21F13B8B90052D6AF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E51E15E41F13ED650052D6AF /* Image2CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image2CollectionViewCell.swift; sourceTree = "<group>"; };
 		E539A76E1F056EC900F5FDAB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E561C8B71F15361A00101239 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = "../../../../../Downloads/FunkyForecast-iOSFinalApp-master/FunkyForecast/Main.storyboard"; sourceTree = "<group>"; };
 		E5F310971F041FB4007867FB /* FunkyForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FunkyForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5F3109A1F041FB4007867FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5F3109C1F041FB4007867FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -113,10 +113,10 @@
 				E5F3109C1F041FB4007867FB /* ViewController.swift */,
 				E539A76E1F056EC900F5FDAB /* DetailViewController.swift */,
 				6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */,
-				6467E0831F15321400EACCBA /* Main.storyboard */,
 				E51E15E41F13ED650052D6AF /* Image2CollectionViewCell.swift */,
 				E51E15E21F13B8B90052D6AF /* ImageCollectionViewCell.swift */,
 				641920511F05DCC5003F84D1 /* SideBar.swift */,
+				E561C8B71F15361A00101239 /* Main.storyboard */,
 				641920521F05DCC5003F84D1 /* SideBarTableViewController.swift */,
 				E5F310A11F041FB4007867FB /* Assets.xcassets */,
 				E5F310A31F041FB4007867FB /* LaunchScreen.storyboard */,
@@ -252,7 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6467E0841F15321400EACCBA /* Main.storyboard in Resources */,
+				E561C8B81F15361A00101239 /* Main.storyboard in Resources */,
 				E5F310A51F041FB4007867FB /* LaunchScreen.storyboard in Resources */,
 				E5F310A21F041FB4007867FB /* Assets.xcassets in Resources */,
 			);
