@@ -22,7 +22,7 @@ extension UIViewController {
     }
 }
 
-class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource
+class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     
     
@@ -101,7 +101,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var weatherName: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
+    @IBOutlet weak var hourlyCollectionView: UICollectionView!
+    @IBOutlet weak var dailyCollectionView: UICollectionView!
     
+
     var state = ""
     var town = ""
     var townURL = ""
@@ -146,7 +149,24 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var currentWeatherURL = ""
     var hourlyWeatherURL = ""
     var sevenDayForecastURL = ""
-    var imageArray = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
+    var imageArray = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow"), UIImage(named: "Sunny")]
+    
+    var timeLabelArray = ["11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM"]
+    
+    var tempLabelArray = ["75º", "72º", "71º", "72º", "81º", "70º", "76º","80º"]
+    
+    
+    var image2Array = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
+    
+    var dayArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    
+    var dailyTempLowArray = ["75º", "72º", "71º", "72º", "81º", "70º", "76º"]
+    
+    var dailyTempHighArray = ["78º", "79º", "72º", "82º", "93º", "81º", "87º"]
+
+
+
+
     
     
     
@@ -155,6 +175,38 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     override func viewDidLoad()
     {
         super.viewDidLoad()
+
+        
+        
+//        dailyCollectionView.delegate = self
+//        hourlyCollectionView.delegate = self
+//        
+//        dailyCollectionView.dataSource = self
+//        hourlyCollectionView.dataSource = self
+//        
+//        
+//       // dailyCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layoutA)
+//       // hourlyCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layoutB)
+//
+//        
+//        
+//        dailyCollectionView.delegate = self
+//        hourlyCollectionView.delegate = self
+//        
+//        dailyCollectionView.dataSource = self
+//        hourlyCollectionView.dataSource = self
+//
+//        
+//        hourlyCollectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCollectionViewCell")
+//        dailyCollectionView.register(Image2CollectionViewCell.self, forCellWithReuseIdentifier: "Image2CollectionViewCell")
+//        
+////        
+//        self.view.addSubview(dailyCollectionView)
+//        self.view.addSubview(hourlyCollectionView)
+//        self.collectionViewHourly.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ImageCollectionViewCell".self)
+//        self.collectionViewDaily.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Image2CollectionViewCell".self)
+        
+        
         
         
         manager.delegate = self
@@ -233,18 +285,74 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
 
     }
+
+    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        if collectionView == self.hourlyCollectionView {
+//        let cellSize = CGSize(width: 80, height: 80)
+//        return cellSize
+//        }
+//        else
+//        {
+//            let cellSize2 = CGSize(width: 315, height: 50)
+//            return cellSize2
+//        }
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+//        if collectionView == self.hourlyCollectionView {
+//            return UIEdgeInsetsMake(0, 0, 0, 0)
+//        }
+//        else {
+//            return UIEdgeInsetsMake(10, 20, 20, 10)
+//        }
+//    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.hourlyCollectionView {
         return imageArray.count
+            
+        }
+        else {
+            return dailyTempLowArray.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
         
-        cell.imgImage.image = imageArray[indexPath.row]
         
-        return cell
+        
+        if collectionView == hourlyCollectionView {
+            let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
+            print(imageArray.count)
+          cellA.imgImage?.image = imageArray[indexPath.row]
+            cellA.hourlyTimeLabel?.text = timeLabelArray[indexPath.row]
+            cellA.hourlyTempLabel?.text = tempLabelArray[indexPath.row]
+            return cellA
+
+            
+
+        
+        }
+        else {
+            let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
+            cellB.imgImage2?.image = image2Array[indexPath.row]
+            cellB.dailyDayLabel?.text = dayArray[indexPath.row]
+            cellB.dailyTempLowLabel?.text = dailyTempLowArray[indexPath.row]
+            cellB.dailyTempHighLabel?.text = dailyTempHighArray[indexPath.row]
+//            self.dailyCollectionView.layoutIfNeeded() 
+            return cellB
+        }
+        
+
+    
+
     }
+    
+    
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
