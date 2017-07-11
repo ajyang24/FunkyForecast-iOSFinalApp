@@ -146,7 +146,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var currentWeatherURL = ""
     var hourlyWeatherURL = ""
     var sevenDayForecastURL = ""
-    var imageArray = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
+    var imageArray = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "Fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
     
     
     
@@ -154,8 +154,11 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     override func viewDidLoad()
     {
+        
         super.viewDidLoad()
         
+        locationLabel.text = town + ", " + state
+
         
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -164,9 +167,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         print(state)
         
-        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(self.townURL).json"
-        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(self.townURL).json"
-        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(self.townURL).json"
+        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+        
         
         if let url1 = URL(string: currentWeatherURL)
         {
@@ -250,8 +254,84 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         super.viewDidAppear(animated)
         
         AppUtility.lockOrientation(.portrait)
-        // Or to rotate and lock
-        // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
+        
+        locationLabel.text = town + ", " + state
+        
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+        
+        print(state)
+        
+        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+        
+        
+        if let url1 = URL(string: currentWeatherURL)
+        {
+            if let myData = try? Data(contentsOf: url1, options: [])
+            {
+                let json = JSON(myData)
+                parse(myData: json)
+            }
+        }
+        
+        if let url2 = URL(string: hourlyWeatherURL)
+        {
+            if let myData2 = try? Data(contentsOf: url2, options: [])
+            {
+                let json = JSON(myData2)
+                parse2(myData2: json)
+            }
+        }
+        
+        if let url3 = URL(string: sevenDayForecastURL)
+        {
+            if let myData3 = try? Data(contentsOf: url3, options: [])
+            {
+                let json = JSON(myData3)
+                parse3(myData3: json)
+            }
+        }
+        
+        visualEffectView.alpha = 0
+        aboutView.alpha = 0
+        locationsView.alpha = 0
+        settingsView.alpha = 0
+        
+        imageView.image = UIImage(named: "image2")
+        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
+        sideBar.delegate = self
+        
+        currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
+        
+        
+        //locationLabel.text = fullName
+        quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
+        weatherName.text = weather
+        
+        
+        windDirection.text = "Wind Direction: " + windDir
+        visibility.text = "Visibility: " + visibilityMi + " Miles"
+        feelsLike.text = "It Feels Like: " + feelsLikeF + "ºF"
+        relativeHumidity.text = "Relative Humidity: " + humidity
+        windSpeed.text = "Wind Speed: " + String(windMph) + " Mph"
+        dewpoint.text = String(format: "Dewpoint: %.0fºF", arguments: [dewpointF])
+        uvIndex.text! = "UV Index: " + uv
+        if windchillF == "NA"
+        {
+            windchill.text = "Windchill: " + "NA"
+        }
+        else
+        {
+            windchill.text = "Windchill: " + windchillF + "ºF"
+        }
+        
+        weatherIcon.image = UIImage(named: weather)
+        self.hideKeyboardWhenTappedAround()
+
         
     }
     
@@ -262,6 +342,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     @IBAction func enterLocationButton(_ sender: Any)
     {
+        print("hi")
         let string = stateLabel.text! + townLabel.text!
         let character = " "
         if string.contains(character)
@@ -273,41 +354,23 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         }
         else
         {
-            locationLabel.text = townLabel.text! + ", " + stateLabel.text!
-            self.currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(stateLabel.text)/\(townLabel.text).json"
-            self.hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(stateLabel.text)/\(townLabel.text).json"
-            self.sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(stateLabel.text)/\(townLabel.text).json"
             
-            if let url1 = URL(string: currentWeatherURL)
+            
+            state = stateLabel.text!
+            townURL = townLabel.text!
+            town = (townLabel.text?.replacingOccurrences(of: "_", with: " "))!
+            
+            locationLabel.text = town + ", " + state
+
+            UIView.animate(withDuration: 0.5, animations:
             {
-                if let myData = try? Data(contentsOf: url1, options: [])
-                {
-                    let json = JSON(myData)
-                    parse(myData: json)
-                }
-            }
+                self.viewDidAppear(true)
+
+            })
             
-            if let url2 = URL(string: hourlyWeatherURL)
-            {
-                if let myData2 = try? Data(contentsOf: url2, options: [])
-                {
-                    let json = JSON(myData2)
-                    parse2(myData2: json)
-                }
-            }
-            
-            if let url3 = URL(string: sevenDayForecastURL)
-            {
-                if let myData3 = try? Data(contentsOf: url3, options: [])
-                {
-                    let json = JSON(myData3)
-                    parse3(myData3: json)
-                }
-            }
-            
-            self.hideKeyboardWhenTappedAround()
         }
     }
+    
     
     
     override func viewWillDisappear(_ animated: Bool)

@@ -114,7 +114,7 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         
         
         let sideBarBehavior:UIDynamicItemBehavior = UIDynamicItemBehavior(items: [sideBarContainerView])
-        sideBarBehavior.elasticity = 0.3
+        sideBarBehavior.elasticity = 0.0
         animator.addBehavior(sideBarBehavior)
     
     }
