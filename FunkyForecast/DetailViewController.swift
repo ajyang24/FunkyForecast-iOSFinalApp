@@ -150,6 +150,18 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var hourlyWeatherURL = ""
     var sevenDayForecastURL = ""
     var imageArray = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "Fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
+    var timeLabelArray = ["11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM"]
+    
+    var tempLabelArray = ["75º", "72º", "71º", "72º", "81º", "70º", "76º","80º"]
+    
+    
+    var image2Array = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "Fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
+    
+    var dayArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    
+    var dailyTempLowArray = ["75º", "72º", "71º", "72º", "81º", "70º", "76º"]
+    
+    var dailyTempHighArray = ["78º", "79º", "72º", "82º", "93º", "81º", "87º"]
     
     
     

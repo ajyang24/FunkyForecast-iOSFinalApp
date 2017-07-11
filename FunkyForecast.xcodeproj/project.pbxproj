@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		641920531F05DCC5003F84D1 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641920511F05DCC5003F84D1 /* SideBar.swift */; };
 		641920541F05DCC5003F84D1 /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641920521F05DCC5003F84D1 /* SideBarTableViewController.swift */; };
-		641920561F0D29E7003F84D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 641920551F0D29E7003F84D1 /* Main.storyboard */; };
 		6467E0821F0EAEB300EACCBA /* SwiftyJSON-1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */; };
+		6467E0841F15321400EACCBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6467E0831F15321400EACCBA /* Main.storyboard */; };
 		E51E15E31F13B8B90052D6AF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E15E21F13B8B90052D6AF /* ImageCollectionViewCell.swift */; };
 		E51E15E51F13ED650052D6AF /* Image2CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E15E41F13ED650052D6AF /* Image2CollectionViewCell.swift */; };
 		E539A76F1F056EC900F5FDAB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539A76E1F056EC900F5FDAB /* DetailViewController.swift */; };
@@ -42,8 +42,8 @@
 /* Begin PBXFileReference section */
 		641920511F05DCC5003F84D1 /* SideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		641920521F05DCC5003F84D1 /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
-		641920551F0D29E7003F84D1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftyJSON-1.swift"; sourceTree = "<group>"; };
+		6467E0831F15321400EACCBA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E51E15E21F13B8B90052D6AF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E51E15E41F13ED650052D6AF /* Image2CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image2CollectionViewCell.swift; sourceTree = "<group>"; };
 		E539A76E1F056EC900F5FDAB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 				E5F3109C1F041FB4007867FB /* ViewController.swift */,
 				E539A76E1F056EC900F5FDAB /* DetailViewController.swift */,
 				6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */,
-				641920551F0D29E7003F84D1 /* Main.storyboard */,
+				6467E0831F15321400EACCBA /* Main.storyboard */,
 				E51E15E41F13ED650052D6AF /* Image2CollectionViewCell.swift */,
 				E51E15E21F13B8B90052D6AF /* ImageCollectionViewCell.swift */,
 				641920511F05DCC5003F84D1 /* SideBar.swift */,
@@ -211,7 +211,7 @@
 				TargetAttributes = {
 					E5F310961F041FB4007867FB = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 4MT9JHPAJQ;
+						DevelopmentTeam = UUQSXCA3SX;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -252,7 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				641920561F0D29E7003F84D1 /* Main.storyboard in Resources */,
+				6467E0841F15321400EACCBA /* Main.storyboard in Resources */,
 				E5F310A51F041FB4007867FB /* LaunchScreen.storyboard in Resources */,
 				E5F310A21F041FB4007867FB /* Assets.xcassets in Resources */,
 			);
@@ -433,10 +433,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 4MT9JHPAJQ;
+				DEVELOPMENT_TEAM = UUQSXCA3SX;
 				INFOPLIST_FILE = FunkyForecast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = whatever.FunkyForecast;
+				PRODUCT_BUNDLE_IDENTIFIER = whatever.FunkyForecast.sai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FunkyForecast/FunkyForecast-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -449,10 +449,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 4MT9JHPAJQ;
+				DEVELOPMENT_TEAM = UUQSXCA3SX;
 				INFOPLIST_FILE = FunkyForecast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = whatever.FunkyForecast;
+				PRODUCT_BUNDLE_IDENTIFIER = whatever.FunkyForecast.sai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FunkyForecast/FunkyForecast-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
