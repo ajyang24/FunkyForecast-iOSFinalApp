@@ -172,6 +172,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     {
         
         
+        
+        
 
         locationLabel.text = town + ", " + state
 
@@ -299,12 +301,15 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("it worked")
         
+        
         if collectionView == hourlyCollectionView {
+            
+            
             print("it worked")
             let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
             print(imageArray.count)
             
-            for i in 0...23
+            
             let hourly = hourlyInfo[indexPath.row]
             cellA.imgImage?.image = UIImage(named: "Cloudy")
             
@@ -313,6 +318,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
                 twelveHourTime -= 12
                 cellA.hourlyTimeLabel?.text = String(twelveHourTime)
             }
+        
             else if twelveHourTime == 0 {
                 twelveHourTime += 12
                 cellA.hourlyTimeLabel?.text = String(twelveHourTime)
@@ -321,35 +327,39 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
             else {
                 cellA.hourlyTimeLabel?.text = hourly["hour"]
-                
             }
+            
             
             cellA.hourlyTempLabel?.text = hourly["english"]
                 cellA.pmLabel?.text = hourly["ampm"]
             
-        
+            
+                
             return cellA
 
-            
+        
 
         
         }
-        else {
+        else if collectionView == dailyCollectionView {
+            print("Hello")
             let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
             let daily = dailyInfo[indexPath.row]
-            
-            cellB.imgImage2?.image = image2Array[indexPath.row]
+            cellB.imgImage2?.image = UIImage(named: "Clear")
             cellB.dailyDayLabel?.text = daily["weekday"]
             cellB.dailyTempLowLabel?.text = daily["fahrenheit"]
             cellB.dailyTempHighLabel?.text = daily["celsius"]
-//            self.dailyCollectionView.layoutIfNeeded() 
+            
             return cellB
+    
         }
+
+        
         
 
     
-
     }
+    
     
     
 
@@ -607,7 +617,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     {
         for k in myData3["simpleforecast"]["forecastday"].arrayValue
         {
-            let day = k["weekday"].stringValue
+            let day = k["date"]["weekday"].stringValue
             let dailyHighF = k["high"]["fahrenheit"].stringValue
             let dailyHighC = k["high"]["celsius"].stringValue
             let dailyLowF = k["low"]["fahrenheit"].stringValue
