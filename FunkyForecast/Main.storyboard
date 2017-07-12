@@ -365,7 +365,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Vl-Mx-dEN">
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Vl-Mx-dEN">
                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="1000"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
@@ -471,6 +471,7 @@
         <!--View Controller-->
         <scene sceneID="X7c-fV-Zhg">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fa2-ZM-YO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="BaO-4T-9Wp" customClass="ViewController" customModule="FunkyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0pL-bZ-fV8"/>
@@ -492,13 +493,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="ilH-5V-fK4"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fa2-ZM-YO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3728.4375" y="87.676056338028175"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="UQH-s7-0jW">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iX3-UZ-xr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="UCM-bc-VwG" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pB1-6D-94M"/>
@@ -543,7 +544,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iX3-UZ-xr5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4876.875" y="94.014084507042256"/>
         </scene>

@@ -12,7 +12,6 @@
 		6467E0821F0EAEB300EACCBA /* SwiftyJSON-1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */; };
 		6467E0881F1537FF00EACCBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6467E0871F1537FF00EACCBA /* Main.storyboard */; };
 		6467E08C1F15482200EACCBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467E08B1F15482200EACCBA /* ViewController.swift */; };
-		6467E08E1F15495800EACCBA /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467E08D1F15495800EACCBA /* LocationSearchTable.swift */; };
 		E51E15E31F13B8B90052D6AF /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E15E21F13B8B90052D6AF /* ImageCollectionViewCell.swift */; };
 		E51E15E51F13ED650052D6AF /* Image2CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51E15E41F13ED650052D6AF /* Image2CollectionViewCell.swift */; };
 		E539A76F1F056EC900F5FDAB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539A76E1F056EC900F5FDAB /* DetailViewController.swift */; };
@@ -46,7 +45,6 @@
 		6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftyJSON-1.swift"; sourceTree = "<group>"; };
 		6467E0871F1537FF00EACCBA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6467E08B1F15482200EACCBA /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
-		6467E08D1F15495800EACCBA /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationSearchTable.swift; path = ../LocationSearchTable.swift; sourceTree = "<group>"; };
 		E51E15E21F13B8B90052D6AF /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E51E15E41F13ED650052D6AF /* Image2CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image2CollectionViewCell.swift; sourceTree = "<group>"; };
 		E539A76E1F056EC900F5FDAB /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			children = (
 				E5F3109A1F041FB4007867FB /* AppDelegate.swift */,
 				6467E08B1F15482200EACCBA /* ViewController.swift */,
-				6467E08D1F15495800EACCBA /* LocationSearchTable.swift */,
 				E539A76E1F056EC900F5FDAB /* DetailViewController.swift */,
 				6467E0811F0EAEB300EACCBA /* SwiftyJSON-1.swift */,
 				6467E0871F1537FF00EACCBA /* Main.storyboard */,
@@ -285,7 +282,6 @@
 				641920531F05DCC5003F84D1 /* SideBar.swift in Sources */,
 				E5F3109B1F041FB4007867FB /* AppDelegate.swift in Sources */,
 				E51E15E31F13B8B90052D6AF /* ImageCollectionViewCell.swift in Sources */,
-				6467E08E1F15495800EACCBA /* LocationSearchTable.swift in Sources */,
 				E539A76F1F056EC900F5FDAB /* DetailViewController.swift in Sources */,
 				E51E15E51F13ED650052D6AF /* Image2CollectionViewCell.swift in Sources */,
 				641920541F05DCC5003F84D1 /* SideBarTableViewController.swift in Sources */,

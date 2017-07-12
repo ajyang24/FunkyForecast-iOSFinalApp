@@ -22,6 +22,10 @@ extension UIViewController {
     }
 }
 
+protocol HandleMapSearch: class {
+    func dropPinZoomIn(_ placemark:MKPlacemark)
+}
+
 class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     
@@ -170,7 +174,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     override func viewDidLoad()
     {
-        
+        super.viewDidLoad()
+
         
 
         locationLabel.text = town + ", " + state
@@ -183,9 +188,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         print(state)
         
-//        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
-//        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
-//        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
         currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Chicago.json"
         hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Chicago.json"
         sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
@@ -251,10 +256,11 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             windchill.text = "Windchill: " + windchillF + "ºF"
         }
         
+        
+        
         weatherIcon.image = UIImage(named: weather)
         self.hideKeyboardWhenTappedAround()
 
-        super.viewDidLoad() 
     }
 
     
@@ -304,11 +310,12 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
             print(imageArray.count)
             
-            for i in 0...23
+            
             let hourly = hourlyInfo[indexPath.row]
             cellA.imgImage?.image = UIImage(named: "Cloudy")
             
             var twelveHourTime: Int = Int(hourly["hour"]!)!
+            
             if twelveHourTime>12 {
                 twelveHourTime -= 12
                 cellA.hourlyTimeLabel?.text = String(twelveHourTime)
@@ -368,9 +375,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         print(state)
         
-//        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
-//        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
-//        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
         currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
         hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
         sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Barrington.json"
@@ -418,6 +425,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         //locationLabel.text = fullName
         quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
         weatherName.text = weather
+        weatherName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        weatherName.adjustsFontForContentSizeCategory = true
         
         
         windDirection.text = "Wind Direction: " + windDir
@@ -436,6 +445,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             windchill.text = "Windchill: " + windchillF + "ºF"
         }
         
+        if weatherName.text? .contains("Thunder") == true
+        {
+            weatherIcon.image = UIImage(named: "Thunder")
+        }
         weatherIcon.image = UIImage(named: weather)
         self.hideKeyboardWhenTappedAround()
 
