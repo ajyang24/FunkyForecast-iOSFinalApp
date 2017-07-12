@@ -155,7 +155,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var tempLabelArray = ["75º", "72º", "71º", "72º", "81º", "70º", "76º","80º"]
     
     
-    var image2Array = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "Fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
+    var image2Array = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow")]
     
     var dayArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     
@@ -170,40 +170,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     override func viewDidLoad()
     {
         
-        super.viewDidLoad()
+        
 
-        
-        
-//        dailyCollectionView.delegate = self
-//        hourlyCollectionView.delegate = self
-//        
-//        dailyCollectionView.dataSource = self
-//        hourlyCollectionView.dataSource = self
-//        
-//        
-//       // dailyCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layoutA)
-//       // hourlyCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layoutB)
-//
-//        
-//        
-//        dailyCollectionView.delegate = self
-//        hourlyCollectionView.delegate = self
-//        
-//        dailyCollectionView.dataSource = self
-//        hourlyCollectionView.dataSource = self
-//
-//        
-//        hourlyCollectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCollectionViewCell")
-//        dailyCollectionView.register(Image2CollectionViewCell.self, forCellWithReuseIdentifier: "Image2CollectionViewCell")
-//        
-////        
-//        self.view.addSubview(dailyCollectionView)
-//        self.view.addSubview(hourlyCollectionView)
-//        self.collectionViewHourly.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ImageCollectionViewCell".self)
-//        self.collectionViewDaily.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Image2CollectionViewCell".self)
-        
-        
-        
         locationLabel.text = town + ", " + state
 
         
@@ -282,7 +250,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         weatherIcon.image = UIImage(named: weather)
         self.hideKeyboardWhenTappedAround()
 
-
+        super.viewDidLoad() 
     }
 
     
