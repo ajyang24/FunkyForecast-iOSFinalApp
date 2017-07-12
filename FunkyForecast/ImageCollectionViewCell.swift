@@ -14,6 +14,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var hourlyTimeLabel: UILabel!
     @IBOutlet weak var hourlyTempLabel: UILabel!
     
+    @IBOutlet weak var pmLabel: UILabel!
 //    var imageArray = [UIImage(named: "Clear"), UIImage(named: "Cloudy"), UIImage(named: "fog"), UIImage(named: "Mostly Cloudy"), UIImage(named: "Partly Cloudy"), UIImage(named: "Rain"), UIImage(named: "snow"), UIImage(named: "Sunny")]
 //    
 //    var timeLabelArray = ["11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM"]

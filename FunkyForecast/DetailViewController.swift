@@ -42,7 +42,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
 
     var sideBar:SideBar = SideBar()
-    var locations = [[String: String]]()
+    var dailyInfo = [[String: String]]()
+    var hourlyInfo = [[String: String]]()
     var tempF = 0.0
     var tempC = 0.0
     var weather = ""
@@ -182,9 +183,12 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         print(state)
         
-        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
-        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
-        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+//        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
+//        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
+//        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Chicago.json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Chicago.json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
         
         
         if let url1 = URL(string: currentWeatherURL)
@@ -277,26 +281,53 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         if collectionView == self.hourlyCollectionView {
-        return imageArray.count
+            
+            print(hourlyInfo.count)
+        return hourlyInfo.count
             
         }
         else {
-            return dailyTempLowArray.count
+            return dailyInfo.count
         }
+        
+    
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
+        print("it worked")
         
         if collectionView == hourlyCollectionView {
+            print("it worked")
             let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
             print(imageArray.count)
-          cellA.imgImage?.image = imageArray[indexPath.row]
-            cellA.hourlyTimeLabel?.text = timeLabelArray[indexPath.row]
-            cellA.hourlyTempLabel?.text = tempLabelArray[indexPath.row]
+            
+            for i in 0...23
+            let hourly = hourlyInfo[indexPath.row]
+            cellA.imgImage?.image = UIImage(named: "Cloudy")
+            
+            var twelveHourTime: Int = Int(hourly["hour"]!)!
+            if twelveHourTime>12 {
+                twelveHourTime -= 12
+                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
+            }
+            else if twelveHourTime == 0 {
+                twelveHourTime += 12
+                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
+                
+            }
+            
+            else {
+                cellA.hourlyTimeLabel?.text = hourly["hour"]
+                
+            }
+            
+            cellA.hourlyTempLabel?.text = hourly["english"]
+                cellA.pmLabel?.text = hourly["ampm"]
+            
+        
             return cellA
 
             
@@ -305,10 +336,12 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         }
         else {
             let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
+            let daily = dailyInfo[indexPath.row]
+            
             cellB.imgImage2?.image = image2Array[indexPath.row]
-            cellB.dailyDayLabel?.text = dayArray[indexPath.row]
-            cellB.dailyTempLowLabel?.text = dailyTempLowArray[indexPath.row]
-            cellB.dailyTempHighLabel?.text = dailyTempHighArray[indexPath.row]
+            cellB.dailyDayLabel?.text = daily["weekday"]
+            cellB.dailyTempLowLabel?.text = daily["fahrenheit"]
+            cellB.dailyTempHighLabel?.text = daily["celsius"]
 //            self.dailyCollectionView.layoutIfNeeded() 
             return cellB
         }
@@ -335,9 +368,12 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         print(state)
         
-        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
-        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
-        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+//        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
+//        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
+//        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Barrington.json"
         
         
         if let url1 = URL(string: currentWeatherURL)
@@ -556,12 +592,15 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             let hourlyTempC = j["temp"]["metric"].stringValue
             let hourlyCondition = j["condition"].stringValue
             let hourlyCondition2 = j["wx"].stringValue
+            let amPm = j["FCTTIME"]["ampm"].stringValue
             
-            let obj = ["civil": hourlyAmPmTime, "hour": hourly24Time, "english": hourlyTempF, "metric": hourlyTempC, "condition": hourlyCondition, "condition2": hourlyCondition2]
-            locations.append(obj)
+            let obj = ["civil": hourlyAmPmTime, "hour": hourly24Time, "english": hourlyTempF, "metric": hourlyTempC, "condition": hourlyCondition, "wx": hourlyCondition2, "ampm": amPm]
+            hourlyInfo.append(obj)
             
             
         }
+        hourlyCollectionView.reloadData()
+        
     }
 
     func parse3(myData3:JSON)
@@ -577,9 +616,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
             let obj2 = ["weekday": day, "fahrenheit": dailyHighF, "celsius": dailyHighC, "fahrenheit": dailyLowF, "celsius": dailyLowC, "conditions": dailyConditions]
             
-            locations.append(obj2)
+            dailyInfo.append(obj2)
   
         }
+        dailyCollectionView.reloadData()
     }
     
     func animateIn()
