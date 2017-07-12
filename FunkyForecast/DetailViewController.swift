@@ -321,34 +321,30 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
             var twelveHourTime: Int = Int(hourly["hour"]!)!
             
-            if twelveHourTime>12 {
+            if twelveHourTime>12
+            {
                 twelveHourTime -= 12
                 cellA.hourlyTimeLabel?.text = String(twelveHourTime)
             }
-        
-            else if twelveHourTime == 0 {
+            else if twelveHourTime == 0
+            {
                 twelveHourTime += 12
                 cellA.hourlyTimeLabel?.text = String(twelveHourTime)
-                
             }
-            
-            else {
+            else
+            {
                 cellA.hourlyTimeLabel?.text = hourly["hour"]
             }
-            
-            
             cellA.hourlyTempLabel?.text = hourly["english"]
                 cellA.pmLabel?.text = hourly["ampm"]
-            
-            
-                
             return cellA
-
-        
-
-        
+            
+            
         }
-        else if collectionView == dailyCollectionView {
+            
+            
+        else if collectionView == dailyCollectionView
+        {
             print("Hello")
             let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
             let daily = dailyInfo[indexPath.row]
@@ -358,13 +354,12 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             cellB.dailyTempHighLabel?.text = daily["celsius"]
             
             return cellB
-    
         }
-
         
+        let cellC = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath)
         
+        return cellC
 
-    
     }
     
     
