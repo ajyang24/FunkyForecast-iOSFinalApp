@@ -338,7 +338,6 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         {
             
             
-//            print("it worked")
             let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
             
             
