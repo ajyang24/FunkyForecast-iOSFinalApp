@@ -306,10 +306,15 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        let cell = locationsTableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        
+        
         cell.textLabel?.text = locationsArray[indexPath.row]
         
+        
         return cell
+            
+        
 
     }
     
@@ -334,7 +339,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        print("it worke")
+        
         
         
         if collectionView == hourlyCollectionView
@@ -383,7 +388,6 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
         else
         {
-            print("Hello")
             let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
             
             
@@ -420,8 +424,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         AppUtility.lockOrientation(.portrait)
         
-        
-       
+        locationsTableView.reloadData()
         
         locationLabel.text = town + ", " + state
         
@@ -512,6 +515,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         weatherIcon.image = UIImage(named: weather)
         }
         
+        print(locationsArray)
+
         
         self.hideKeyboardWhenTappedAround()
 
@@ -527,7 +532,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     {
         print("hi")
         
-        locationsArray.append(townLabel.text! + ", " + stateLabel.text!)
+        
         let string = stateLabel.text! + townLabel.text!
         let character = " "
         if string.contains(character)
@@ -540,6 +545,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         else
         {
             
+            locationsArray.append(townLabel.text! + ", " + stateLabel.text!)
+            print(locationsArray)
             
             state = stateLabel.text!
             townURL = townLabel.text!
