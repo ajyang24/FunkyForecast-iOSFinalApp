@@ -86,6 +86,7 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate {
         }else{
             showSideBar(true)
             delegate?.sideBarWillOpen?()
+            
         }
     
     }

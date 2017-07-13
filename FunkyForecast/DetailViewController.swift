@@ -71,6 +71,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var visibilityMi = ""
     var visibilityKm = ""
     var uv = ""
+    var lastUpdatedInfo = ""
     
     
     
@@ -108,6 +109,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyCollectionView: UICollectionView!
+    @IBOutlet weak var lastUpdatedInfoLabel: UILabel!
+    @IBOutlet weak var gifSwipeRightImageView: UIImageView!
     
     
     
@@ -177,7 +180,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        gifSwipeRightImageView.loadGif(name: "rightarrow2")
+        
         
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -228,6 +232,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         sideBar.delegate = self
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
+        lastUpdatedInfoLabel.text = lastUpdatedInfo
         
         
         //locationLabel.text = fullName
@@ -333,7 +338,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         {
             
             
-            print("it worked")
+//            print("it worked")
             let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
             
             
@@ -385,6 +390,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
             return cellB
         }
+
         
        
 
@@ -635,6 +641,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         visibilityMi = myData["current_observation"]["visibility_mi"].stringValue
         visibilityKm = myData["current_observation"]["visibility_km"].stringValue
         uv = myData["current_observation"]["UV"].stringValue
+        lastUpdatedInfo = myData["current_observation"]["observation_time"].stringValue
         
     }
     
@@ -661,7 +668,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
     func parse3(myData3:JSON)
     {
-        for k in myData3["simpleforecast"]["forecastday"].arrayValue
+        for k in myData3["forecast"]["simpleforecast"]["forecastday"].arrayValue
         {
             let day = k["date"]["weekday"].stringValue
             let dailyHighF = k["high"].dictionaryValue.index(forKey: "fahrenheit")
