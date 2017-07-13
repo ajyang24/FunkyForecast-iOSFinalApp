@@ -43,8 +43,8 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="57ºC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxJ-yY-4JS">
-                                                <rect key="frame" x="16" y="448" width="167" height="100"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="107ºC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxJ-yY-4JS">
+                                                <rect key="frame" x="16" y="448" width="207" height="100"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="69"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -83,10 +83,6 @@
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="locationicon" translatesAutoresizingMaskIntoConstraints="NO" id="f92-jP-q5F">
                                                 <rect key="frame" x="96" y="23" width="15" height="15"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vEn-EL-bl8">
-                                                <rect key="frame" x="0.0" y="100" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdo-ul-bTX">
@@ -486,7 +482,6 @@
                         <outlet property="dailyCollectionView" destination="3Wm-q8-mIf" id="Haz-g5-qRh"/>
                         <outlet property="dewpoint" destination="3Nw-zN-1eR" id="zPD-Im-CGB"/>
                         <outlet property="feelsLike" destination="R1L-y8-YF5" id="38T-JG-YH8"/>
-                        <outlet property="gifSwipeRightImageView" destination="vEn-EL-bl8" id="OS5-pS-sbM"/>
                         <outlet property="hourlyCollectionView" destination="j4s-S6-80w" id="3aZ-rs-5RB"/>
                         <outlet property="imageView" destination="7DW-Ph-ZPS" id="BFX-Id-HjR"/>
                         <outlet property="lastUpdatedInfoLabel" destination="Rdo-ul-bTX" id="CbT-5c-ppM"/>
