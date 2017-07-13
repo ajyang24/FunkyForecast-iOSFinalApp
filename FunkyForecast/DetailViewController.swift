@@ -109,6 +109,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyCollectionView: UICollectionView!
     
+    
+    
 
     var state = ""
     var town = ""
@@ -117,7 +119,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var effect:UIVisualEffect!
     
     let manager = CLLocationManager()
-    
+
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         let location = locations[0]
@@ -149,7 +152,6 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             }
         }
     }
-    
 
     var currentWeatherURL = ""
     var hourlyWeatherURL = ""
@@ -177,25 +179,16 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         super.viewDidLoad()
 
         
-        
-        
-
-        locationLabel.text = town + ", " + state
-
-        
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-        print(state)
         
         currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
         hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
         sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
-        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Chicago.json"
-        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Chicago.json"
-        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Chicago.json"
+        
         
         
         if let url1 = URL(string: currentWeatherURL)
@@ -258,12 +251,36 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             windchill.text = "Windchill: " + windchillF + "ºF"
         }
         
-        
-        
+        if weather .contains("Thunder") == true
+        {
+            weatherIcon.image = #imageLiteral(resourceName: "Thunderstorm")
+        }
+        else
+        {
         weatherIcon.image = UIImage(named: weather)
+        } 
         self.hideKeyboardWhenTappedAround()
 
     }
+   
+    @IBAction func currentLocationButton(_ sender: Any)
+    {
+        let fullNameArr = locationLabel.text?.components(separatedBy: ", ")
+        
+        town = (fullNameArr?[0])!
+        
+        state = (fullNameArr?[1])!
+        
+        print(state + town)
+        
+        townURL = town.replacingOccurrences(of: " ", with: "_")
+        //do something here after running your function
+        
+        UIView.animate(withDuration: 0.5, animations: {
+        self.viewDidAppear(true)})
+        
+    }
+    
 
     
 //    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -290,13 +307,15 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if collectionView == self.hourlyCollectionView {
-            
+        if collectionView == hourlyCollectionView
+        {
             print(hourlyInfo.count)
-        return hourlyInfo.count
+            return hourlyInfo.count
             
         }
-        else {
+        else
+        {
+            print(dailyInfo.count)
             return dailyInfo.count
         }
         
@@ -304,38 +323,49 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("it worked")
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        print("it worke")
         
         
-        if collectionView == hourlyCollectionView {
+        if collectionView == hourlyCollectionView
+        {
             
             
             print("it worked")
             let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-            print(imageArray.count)
+            
             
             
             let hourly = hourlyInfo[indexPath.row]
-            cellA.imgImage?.image = UIImage(named: "Cloudy")
+            
+            if hourly["condition"]! .contains("Thunderstorm")
+            {
+            cellA.imgImage?.image = #imageLiteral(resourceName: "Thunderstorm")
+            }
+            else
+            {
+            cellA.imgImage?.image = UIImage(named: hourly["condition"]!)
+            }
             
             var twelveHourTime: Int = Int(hourly["hour"]!)!
             
             if twelveHourTime>12
             {
                 twelveHourTime -= 12
-                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
+                cellA.hourlyTimeLabel?.text = String(twelveHourTime) + "PM"
             }
             else if twelveHourTime == 0
             {
                 twelveHourTime += 12
-                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
+                cellA.hourlyTimeLabel?.text = String(twelveHourTime) + "AM"
             }
             else
             {
-                cellA.hourlyTimeLabel?.text = hourly["hour"]
+                cellA.hourlyTimeLabel?.text = hourly["hour"]! + hourly["ampm"]!
             }
-            cellA.hourlyTempLabel?.text = hourly["english"]
+            cellA.hourlyTempLabel?.text = hourly["english"]!
                 cellA.pmLabel?.text = hourly["ampm"]
             return cellA
             
@@ -343,26 +373,25 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         }
             
             
-        else if collectionView == dailyCollectionView
+        else
         {
             print("Hello")
             let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
             let daily = dailyInfo[indexPath.row]
-            cellB.imgImage2?.image = UIImage(named: "Clear")
+            cellB.imgImage2?.image = UIImage(named: daily["conditions"]!)
             cellB.dailyDayLabel?.text = daily["weekday"]
-            cellB.dailyTempLowLabel?.text = daily["fahrenheit"]
-            cellB.dailyTempHighLabel?.text = daily["celsius"]
+            cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
+            cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
             
             return cellB
         }
         
-        let cellC = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath)
-        
-        return cellC
+       
 
     }
     
     
+
     
 
     
@@ -370,6 +399,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         super.viewDidAppear(animated)
         
         AppUtility.lockOrientation(.portrait)
+        
+        
+       
         
         locationLabel.text = town + ", " + state
         
@@ -383,9 +415,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
         hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
         sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
-        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/IL/Barrington.json"
-        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/IL/Barrington.json"
-        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/IL/Barrington.json"
+        
         
         
         if let url1 = URL(string: currentWeatherURL)
@@ -432,6 +462,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         weatherName.text = weather
         weatherName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         weatherName.adjustsFontForContentSizeCategory = true
+        weatherName.adjustsFontSizeToFitWidth = true
+        weatherName.numberOfLines = 2
         
         
         windDirection.text = "Wind Direction: " + windDir
@@ -450,11 +482,17 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             windchill.text = "Windchill: " + windchillF + "ºF"
         }
         
+        
         if weatherName.text? .contains("Thunder") == true
         {
-            weatherIcon.image = UIImage(named: "Thunder")
+            weatherIcon.image = #imageLiteral(resourceName: "Thunderstorm")
         }
+        else
+        {
         weatherIcon.image = UIImage(named: weather)
+        }
+        
+        
         self.hideKeyboardWhenTappedAround()
 
         
@@ -626,15 +664,15 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         for k in myData3["simpleforecast"]["forecastday"].arrayValue
         {
             let day = k["date"]["weekday"].stringValue
-            let dailyHighF = k["high"]["fahrenheit"].stringValue
-            let dailyHighC = k["high"]["celsius"].stringValue
-            let dailyLowF = k["low"]["fahrenheit"].stringValue
-            let dailyLowC = k["low"]["celsius"].stringValue
+            let dailyHighF = k["high"].dictionaryValue.index(forKey: "fahrenheit")
+            let dailyLowF = k["low"].dictionaryValue.index(forKey: "fahrenheit")
+            let dailyHighC = k["high"].dictionaryValue.index(forKey: "celsius")
+            let dailyLowC = k["low"].dictionaryValue.index(forKey: "celsius")
             let dailyConditions = k["conditions"].stringValue
             
-            let obj2 = ["weekday": day, "fahrenheit": dailyHighF, "celsius": dailyHighC, "fahrenheit": dailyLowF, "celsius": dailyLowC, "conditions": dailyConditions]
+            let obj2 = ["weekday": day, "fahrenheitH": dailyHighF!, "celsiusH": dailyHighC!, "fahrenheitL": dailyLowF!, "celsiusL": dailyLowC!, "conditions": dailyConditions] as [String : Any]
             
-            dailyInfo.append(obj2)
+            dailyInfo.append(obj2 as! [String : String])
   
         }
         dailyCollectionView.reloadData()
