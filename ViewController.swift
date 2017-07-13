@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MapKit
 
 class ViewController : UIViewController
 {
@@ -22,16 +21,32 @@ class ViewController : UIViewController
             }
         }
     }
+    
+    
+    @IBOutlet weak var startLabel: UILabel!
+   
+    @IBOutlet weak var titelLabel: UILabel!
+    
+    
 
-    
-    var resultSearchController:UISearchController? = nil
-    
-    let locationManager = CLLocationManager()
-    @IBOutlet weak var mapView: MKMapView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidLoad()
+    {
+        startLabel.alpha = 0
+        
+        
+        UIView.animate(withDuration: 3.3, animations: {
+            self.startLabel.alpha = 1})
+        
+        UIView.animate(withDuration: 3.3, animations: {
+            self.startLabel.alpha = 0})
+        
+        UIView.animate(withDuration: 3.3, animations: {
+            self.startLabel.alpha = 1})
+        
+        
     }
+    
+
     
     
     override func viewDidAppear(_ animated: Bool) {

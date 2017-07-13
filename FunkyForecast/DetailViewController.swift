@@ -26,7 +26,7 @@ protocol HandleMapSearch: class {
     func dropPinZoomIn(_ placemark:MKPlacemark)
 }
 
-class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+class DetailViewController: UIViewController, SideBarDelegate, CLLocationManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate
 {
     
     
@@ -114,7 +114,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     
+    @IBOutlet weak var locationsTableView: UITableView!
     
+    var locationsArray : [String] = []
 
     var state = ""
     var town = ""
@@ -186,8 +188,6 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             backgroundImageView.image = UIImage(named: "PartlyCloudyImage")
             
         }
-        
-        
         
         
         
@@ -268,6 +268,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         {
             weatherIcon.image = #imageLiteral(resourceName: "Thunderstorm")
         }
+        else if weather.contains("Rain") == true
+        {
+            weatherIcon.image = #imageLiteral(resourceName: "Rain")
+        }
         else
         {
         weatherIcon.image = UIImage(named: weather)
@@ -278,6 +282,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
    
     @IBAction func currentLocationButton(_ sender: Any)
     {
+        
         let fullNameArr = locationLabel.text?.components(separatedBy: ", ")
         
         town = (fullNameArr?[0])!
@@ -294,29 +299,19 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return locationsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        cell.textLabel?.text = locationsArray[indexPath.row]
+        
+        return cell
 
-    
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        if collectionView == self.hourlyCollectionView {
-//        let cellSize = CGSize(width: 80, height: 80)
-//        return cellSize
-//        }
-//        else
-//        {
-//            let cellSize2 = CGSize(width: 315, height: 50)
-//            return cellSize2
-//        }
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-//        if collectionView == self.hourlyCollectionView {
-//            return UIEdgeInsetsMake(0, 0, 0, 0)
-//        }
-//        else {
-//            return UIEdgeInsetsMake(10, 20, 20, 10)
-//        }
-//    }
-    
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -390,11 +385,22 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         {
             print("Hello")
             let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
+            
+            
             let daily = dailyInfo[indexPath.row]
+            if daily["conditions"]! .contains("Thunder") == true
+            {
+                cellB.imgImage2?.image = #imageLiteral(resourceName: "Thunderstorm")
+            }
+            else
+            {
             cellB.imgImage2?.image = UIImage(named: daily["conditions"]!)
+            }
             cellB.dailyDayLabel?.text = daily["weekday"]
             cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
             cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
+               
+        
             
             return cellB
         }
@@ -520,6 +526,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBAction func enterLocationButton(_ sender: Any)
     {
         print("hi")
+        
+        locationsArray.append(townLabel.text! + ", " + stateLabel.text!)
         let string = stateLabel.text! + townLabel.text!
         let character = " "
         if string.contains(character)
@@ -692,6 +700,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         }
         dailyCollectionView.reloadData()
     }
+    
     
     func animateIn()
     {
