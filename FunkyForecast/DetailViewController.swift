@@ -112,6 +112,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var lastUpdatedInfoLabel: UILabel!
     @IBOutlet weak var gifSwipeRightImageView: UIImageView!
     
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     
 
@@ -180,7 +181,14 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        gifSwipeRightImageView.loadGif(name: "rightarrow2")
+        if weatherName.text == "Partly Cloudy" {
+            quoteLabel.text = "Cloudy with a chance of meatballs."
+            backgroundImageView.image = UIImage(named: "PartlyCloudyImage")
+            
+        }
+        
+        
+        
         
         
         manager.delegate = self
@@ -348,6 +356,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             {
             cellA.imgImage?.image = #imageLiteral(resourceName: "Thunderstorm")
             }
+            
             else
             {
             cellA.imgImage?.image = UIImage(named: hourly["condition"]!)
@@ -358,16 +367,16 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             if twelveHourTime>12
             {
                 twelveHourTime -= 12
-                cellA.hourlyTimeLabel?.text = String(twelveHourTime) + "PM"
+                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
             }
             else if twelveHourTime == 0
             {
                 twelveHourTime += 12
-                cellA.hourlyTimeLabel?.text = String(twelveHourTime) + "AM"
+                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
             }
             else
             {
-                cellA.hourlyTimeLabel?.text = hourly["hour"]! + hourly["ampm"]!
+                cellA.hourlyTimeLabel?.text = hourly["hour"]
             }
             cellA.hourlyTempLabel?.text = hourly["english"]!
                 cellA.pmLabel?.text = hourly["ampm"]
@@ -670,15 +679,15 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         for k in myData3["forecast"]["simpleforecast"]["forecastday"].arrayValue
         {
             let day = k["date"]["weekday"].stringValue
-            let dailyHighF = k["high"].dictionaryValue.index(forKey: "fahrenheit")
-            let dailyLowF = k["low"].dictionaryValue.index(forKey: "fahrenheit")
-            let dailyHighC = k["high"].dictionaryValue.index(forKey: "celsius")
-            let dailyLowC = k["low"].dictionaryValue.index(forKey: "celsius")
+            let dailyHighF = k["high"]["fahrenheit"].stringValue
+            let dailyLowF = k["low"]["fahrenheit"].stringValue
+            let dailyHighC = k["high"]["celsius"].stringValue
+            let dailyLowC = k["low"]["celsius"].stringValue
             let dailyConditions = k["conditions"].stringValue
             
-            let obj2 = ["weekday": day, "fahrenheitH": dailyHighF!, "celsiusH": dailyHighC!, "fahrenheitL": dailyLowF!, "celsiusL": dailyLowC!, "conditions": dailyConditions] as [String : Any]
+            let obj2 = ["weekday": day, "fahrenheitH": dailyHighF, "celsiusH": dailyHighC, "fahrenheitL": dailyLowF, "celsiusL": dailyLowC, "conditions": dailyConditions]
             
-            dailyInfo.append(obj2 as! [String : String])
+            dailyInfo.append(obj2)
   
         }
         dailyCollectionView.reloadData()
