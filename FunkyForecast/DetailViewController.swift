@@ -183,11 +183,43 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        if weatherName.text == "Partly Cloudy" {
-            quoteLabel.text = "Cloudy with a chance of meatballs."
-            backgroundImageView.image = UIImage(named: "PartlyCloudyImage")
-            
-        }
+       
+        
+        let partlyCloudyQuoteArray = ["Cloudy with a chance of meatballs.", "Half and half.", "Look up."]
+        let randomIndex = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
+        print(partlyCloudyQuoteArray[randomIndex])
+        
+        let overcastQuoteArray = ["Dark and cloudy.", "Gloomy. Hey at least it's not raining.", "Cheer up! Or be a grump."]
+        let randomIndex1 = Int(arc4random_uniform(UInt32(overcastQuoteArray.count)))
+        print(overcastQuoteArray[randomIndex])
+        
+        let sunnyQuoteArray = ["Finally. Sun.", "Stop checking the weather and get outside!", "Free tans!"]
+        let randomIndex2 = Int(arc4random_uniform(UInt32(sunnyQuoteArray.count)))
+        print(sunnyQuoteArray[randomIndex])
+        
+        let thunderQuoteArray = ["Boomshakalaka.", "Get inside!", "1 in 700,000."]
+        let randomIndex3 = Int(arc4random_uniform(UInt32(thunderQuoteArray.count)))
+        print(thunderQuoteArray[randomIndex3])
+        
+        let snowQuoteArray = ["Look outside.", "Where's my present?", "Who said Global Warming was real?"]
+        let randomIndex4 = Int(arc4random_uniform(UInt32(snowQuoteArray.count)))
+        print(snowQuoteArray[randomIndex4])
+        
+        let rainQuoteArray = ["Pitter patter.", "Don't forget your umbrella.", "Hey, free showers!"]
+        let randomIndex5 = Int(arc4random_uniform(UInt32(rainQuoteArray.count)))
+        print(rainQuoteArray[randomIndex5])
+        
+        let fogQuoteArray = ["Can't even see 100 feet ahead.", "Is it overcast? Or fog? Or both?", "What is fog?"]
+        let randomIndex6 = Int(arc4random_uniform(UInt32(fogQuoteArray.count)))
+        print(fogQuoteArray[randomIndex6])
+        
+        let windySunnyQuoteArray = ["Breezy, but nice.", "Don't get carried away!", "Perfect weather."]
+        let randomIndex7 = Int(arc4random_uniform(UInt32(windySunnyQuoteArray.count)))
+        print(windySunnyQuoteArray[randomIndex7])
+        
+        let windyOvercastQuoteArray = ["Breezy and cloudy.", "Don't get carried away!", "Gloomy and cloudy. Boohoo."]
+        let randomIndex8 = Int(arc4random_uniform(UInt32(windySunnyQuoteArray.count)))
+        print(windySunnyQuoteArray[randomIndex8])
         
         
         
@@ -240,11 +272,11 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         sideBar.delegate = self
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
-        lastUpdatedInfoLabel.text = lastUpdatedInfo
+        print(lastUpdatedInfo)
+        
         
         
         //locationLabel.text = fullName
-        quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
         weatherName.text = weather
         
         
@@ -403,7 +435,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             cellB.dailyDayLabel?.text = daily["weekday"]
             cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
             cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
-               
+            
+            
         
             
             return cellB
@@ -421,8 +454,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+       
+
         
-        AppUtility.lockOrientation(.portrait)
         
         locationsTableView.reloadData()
         
