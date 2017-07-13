@@ -273,7 +273,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
         print(lastUpdatedInfo)
-        lastUpdatedInfoLabel.text = lastUpdatedInfo
+        
         
         
         //locationLabel.text = fullName
@@ -431,7 +431,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             cellB.dailyDayLabel?.text = daily["weekday"]
             cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
             cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
-               
+            
+            
         
             
             return cellB
@@ -558,10 +559,18 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         weatherIcon.image = UIImage(named: weather)
         }
         
-        
+        lastUpdatedInfoLabel.text = lastUpdatedInfo
         let partlyCloudyQuoteArray = ["Cloudy with a chance of meatballs.", "Half and half.", "Look up."]
         let randomIndex = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
         print(partlyCloudyQuoteArray[randomIndex])
+        
+        let mostlyCloudyQuoteArray = ["Way too many clouds.", "Wow. No sun?", "See the aurora of gloominess yet?"]
+        let randomIndex9 = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
+        print(partlyCloudyQuoteArray[randomIndex])
+        
+        let cloudyQuoteArray = ["Really Cloudy.", "99% Clouds, 1% Sun.", "Is it fog?"]
+        let randomIndex10 = Int(arc4random_uniform(UInt32(cloudyQuoteArray.count)))
+        print(cloudyQuoteArray[randomIndex10])
         
         let overcastQuoteArray = ["Dark and cloudy.", "Gloomy. Hey at least it's not raining.", "Cheer up! Or be a grump."]
         let randomIndex1 = Int(arc4random_uniform(UInt32(overcastQuoteArray.count)))
@@ -598,10 +607,23 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         
         
-        if weatherName.text == "Partly Cloudy" || weatherName.text == "Mostly Cloudy"{
+        if weatherName.text == "Partly Cloudy" {
             quoteLabel.text = partlyCloudyQuoteArray[randomIndex]
             backgroundImageView.image = UIImage(named: "PartlyCloudyImage")
         }
+        
+        if weatherName.text == "Mostly Cloudy" {
+            quoteLabel.text = mostlyCloudyQuoteArray[randomIndex9]
+            backgroundImageView.image = UIImage(named: "MostlyCloudyImage")
+        }
+        
+        if weatherName.text == "Cloudy" {
+            quoteLabel.text = cloudyQuoteArray[randomIndex10]
+            backgroundImageView.image = UIImage(named: "CloudyImage")
+        }
+        
+        
+
         
         if weatherName.text == "Overcast" {
             quoteLabel.text = overcastQuoteArray[randomIndex1]
@@ -647,6 +669,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             backgroundImageView.image = UIImage(named: "WindyOvercastImage")
             
         }
+        
+        
         
         
         self.hideKeyboardWhenTappedAround()
