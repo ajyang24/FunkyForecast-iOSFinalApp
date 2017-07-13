@@ -71,6 +71,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var visibilityMi = ""
     var visibilityKm = ""
     var uv = ""
+    var lastUpdatedInfo = ""
     
     
     
@@ -108,6 +109,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var dailyCollectionView: UICollectionView!
+    @IBOutlet weak var lastUpdatedInfoLabel: UILabel!
+    @IBOutlet weak var gifSwipeRightImageView: UIImageView!
     
 
     var state = ""
@@ -175,7 +178,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        gifSwipeRightImageView.loadGif(name: "rightarrow2")
+        
         
         
         
@@ -235,6 +239,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         sideBar.delegate = self
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
+        lastUpdatedInfoLabel.text = lastUpdatedInfo
         
         
         //locationLabel.text = fullName
@@ -292,11 +297,13 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         if collectionView == self.hourlyCollectionView {
             
-            print(hourlyInfo.count)
+           // print(hourlyInfo.count)
         return hourlyInfo.count
             
         }
         else {
+            
+            print(dailyInfo.count)
             return dailyInfo.count
         }
         
@@ -311,9 +318,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         if collectionView == hourlyCollectionView {
             
             
-            print("it worked")
+//            print("it worked")
             let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-            print(imageArray.count)
+        
             
             
             let hourly = hourlyInfo[indexPath.row]
@@ -343,22 +350,22 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         }
             
             
-        else if collectionView == dailyCollectionView
+        else
         {
             print("Hello")
             let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
             let daily = dailyInfo[indexPath.row]
             cellB.imgImage2?.image = UIImage(named: "Clear")
             cellB.dailyDayLabel?.text = daily["weekday"]
-            cellB.dailyTempLowLabel?.text = daily["fahrenheit"]
-            cellB.dailyTempHighLabel?.text = daily["celsius"]
+            cellB.dailyTempLowLabel?.text = daily["lowF"]
+            cellB.dailyTempHighLabel?.text = daily["highF"]
+            
+            
             
             return cellB
         }
+
         
-        let cellC = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath)
-        
-        return cellC
 
     }
     
@@ -597,6 +604,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         visibilityMi = myData["current_observation"]["visibility_mi"].stringValue
         visibilityKm = myData["current_observation"]["visibility_km"].stringValue
         uv = myData["current_observation"]["UV"].stringValue
+        lastUpdatedInfo = myData["current_observation"]["observation_time"].stringValue
         
     }
     
@@ -623,7 +631,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
     func parse3(myData3:JSON)
     {
-        for k in myData3["simpleforecast"]["forecastday"].arrayValue
+        for k in myData3["forecast"]["simpleforecast"]["forecastday"].arrayValue
         {
             let day = k["date"]["weekday"].stringValue
             let dailyHighF = k["high"]["fahrenheit"].stringValue
@@ -632,9 +640,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             let dailyLowC = k["low"]["celsius"].stringValue
             let dailyConditions = k["conditions"].stringValue
             
-            let obj2 = ["weekday": day, "fahrenheit": dailyHighF, "celsius": dailyHighC, "fahrenheit": dailyLowF, "celsius": dailyLowC, "conditions": dailyConditions]
             
-            dailyInfo.append(obj2)
+            let obj2 = ["weekday": day, "highF": dailyHighF, "highC": dailyHighC, "lowF": dailyLowF, "lowC": dailyLowC, "conditions": dailyConditions] as [String : Any]
+            
+            dailyInfo.append(obj2 as! [String : String])
   
         }
         dailyCollectionView.reloadData()
