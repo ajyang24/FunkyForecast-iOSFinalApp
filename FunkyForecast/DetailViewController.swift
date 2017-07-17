@@ -508,6 +508,47 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         weatherName.adjustsFontSizeToFitWidth = true
         weatherName.numberOfLines = 2
         
+        if temperatureUnitSwitch.isOn == false
+                 {
+                     print("why are you so angry")
+                     currentTemp.text = String(format: "%.0fºC", arguments: [tempC])
+                     dewpoint.text = String(format: "Dewpoint: %.0fºC", arguments: [dewpointC])
+                     feelsLike.text = "It Feels Like: " + feelsLikeC + "ºC"
+                     if windchillC == "NA"
+                     {
+                         windchill.text = "Windchill: " + "NA"
+                     }
+                     else
+                     {
+                         windchill.text = "Windchill: " + windchillC + "ºC"
+                     }
+                     hourlyCollectionView.reloadData()
+                     dailyCollectionView.reloadData()
+         
+                 }
+         
+         
+         
+         
+         
+                else if temperatureUnitSwitch.isOn == true
+                    {
+                            print("you bicboi")
+                                currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
+                                dewpoint.text = String(format: "Dewpoint: %.0fºF", arguments: [dewpointF])
+                                windchill.text = "Windchill: " + windchillF + "ºF"
+                                feelsLike.text = "It Feels Like: " + feelsLikeF + "ºF"
+                            if windchillC == "NA"
+                            {
+                                windchill.text = "Windchill: " + "NA"
+                            }
+                            else
+                            {
+                                    windchill.text = "Windchill: " + windchillF + "ºF"
+                                }
+                                hourlyCollectionView.reloadData()
+                                dailyCollectionView.reloadData()
+                        }
         
         if distanceUnitSwitch.isOn == false
         {
