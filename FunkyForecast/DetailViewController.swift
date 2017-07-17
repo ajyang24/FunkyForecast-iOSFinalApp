@@ -543,7 +543,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         aboutView.alpha = 0
         locationsView.alpha = 0
         settingsView.alpha = 0
-        
+          
         imageView.image = UIImage(named: "image2")
         sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
         sideBar.delegate = self
