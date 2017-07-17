@@ -75,7 +75,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     
     
+    @IBOutlet weak var temperatureUnitSwitch: UISwitch!
     
+    @IBOutlet weak var distanceUnitSwitch: UISwitch!
     
     @IBOutlet weak var windchill: UILabel!
     @IBOutlet weak var uvIndex: UILabel!
@@ -358,27 +360,13 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         quoteLabel.text = windyOvercastQuoteArray[randomIndex8]
         backgroundImageView.image = UIImage(named: "WindyOvercastImage")
         }
+        
+        
+        
 
     }
    
-    @IBAction func currentLocationButton(_ sender: Any)
-    {
-        
-        let fullNameArr = locationLabel.text?.components(separatedBy: ", ")
-        
-        town = (fullNameArr?[0])!
-        
-        state = (fullNameArr?[1])!
-        
-        print(state + town)
-        
-        townURL = town.replacingOccurrences(of: " ", with: "_")
-        //do something here after running your function
-        
-        UIView.animate(withDuration: 0.5, animations: {
-        self.viewDidAppear(true)})
-        
-    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -432,6 +420,13 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     }
     
     
+    @IBAction func temperatureUnitSwitch(_ sender: Any)
+    {
+        UIView.animate(withDuration: 0.5) { 
+            self.viewDidAppear(true)
+
+        }
+    }
     
 
     
@@ -441,9 +436,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         super.viewDidAppear(animated)
         print("view did appear test")
         
+        lastUpdatedInfoLabel.text = lastUpdatedInfo
         
-       
-
+        
+        
         
         
         locationsTableView.reloadData()
@@ -490,6 +486,79 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             }
         }
         
+        if temperatureUnitSwitch.isOn == false
+        {
+            print("why are you so angry")
+            currentTemp.text = String(format: "%.0fºC", arguments: [tempC])
+            dewpoint.text = String(format: "Dewpoint: %.0fºC", arguments: [dewpointC])
+            feelsLike.text = "It Feels Like: " + feelsLikeC + "ºC"
+            if windchillC == "NA"
+            {
+                windchill.text = "Windchill: " + "NA"
+            }
+            else
+            {
+                windchill.text = "Windchill: " + windchillC + "ºC"
+            }
+            hourlyCollectionView.reloadData()
+            dailyCollectionView.reloadData()
+            
+        }
+            
+            
+            
+            
+            
+        else if temperatureUnitSwitch.isOn == true
+        {
+            print("you bicboi")
+            currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
+            dewpoint.text = String(format: "Dewpoint: %.0fºF", arguments: [dewpointF])
+            windchill.text = "Windchill: " + windchillF + "ºF"
+            feelsLike.text = "It Feels Like: " + feelsLikeF + "ºF"
+            if windchillC == "NA"
+            {
+                windchill.text = "Windchill: " + "NA"
+            }
+            else
+            {
+                windchill.text = "Windchill: " + windchillF + "ºF"
+            }
+            hourlyCollectionView.reloadData()
+            dailyCollectionView.reloadData()
+        }
+        
+        
+        if distanceUnitSwitch.isOn == false
+        {
+            visibility.text = "Visibility: " + visibilityKm + " Kilometers"
+            windSpeed.text = "Wind Speed: " + String(windKph) + " Kph"
+        }
+        else
+        {
+            visibility.text = "Visibility: " + visibilityMi + " Miles"
+            windSpeed.text = "Wind Speed: " + String(windMph)  + " Mph"
+        }
+        
+        
+        windDirection.text = "Wind Direction: " + windDir
+        relativeHumidity.text = "Relative Humidity: " + humidity
+        uvIndex.text! = "UV Index: " + uv
+        
+        
+        if weather .contains("Thunder") == true
+        {
+            weatherIcon.image = #imageLiteral(resourceName: "Thunderstorm")
+        }
+        else if weather .contains("Rain") == true
+        {
+            weatherIcon.image = #imageLiteral(resourceName: "Rain")
+        }
+        else
+        {
+            weatherIcon.image = UIImage(named: weather)
+        }
+        
         visualEffectView.alpha = 0
         aboutView.alpha = 0
         locationsView.alpha = 0
@@ -500,48 +569,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         sideBar.delegate = self
         lastUpdatedInfoLabel.text = lastUpdatedInfo
         
-        currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
         
         
-        //locationLabel.text = fullName
-        weatherName.text = weather
-        weatherName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-        weatherName.adjustsFontForContentSizeCategory = true
-        weatherName.adjustsFontSizeToFitWidth = true
-        weatherName.numberOfLines = 2
         
-        
-        windDirection.text = "Wind Direction: " + windDir
-        visibility.text = "Visibility: " + visibilityMi + " Miles"
-        feelsLike.text = "It Feels Like: " + feelsLikeF + "ºF"
-        relativeHumidity.text = "Relative Humidity: " + humidity
-        windSpeed.text = "Wind Speed: " + String(windMph) + " Mph"
-        dewpoint.text = String(format: "Dewpoint: %.0fºF", arguments: [dewpointF])
-        uvIndex.text! = "UV Index: " + uv
-        if windchillF == "NA"
-        {
-            windchill.text = "Windchill: " + "NA"
-        }
-        else
-        {
-            windchill.text = "Windchill: " + windchillF + "ºF"
-        }
-        
-        
-        if weatherName.text? .contains("Thunder") == true
-        {
-            weatherIcon.image = #imageLiteral(resourceName: "Thunderstorm")
-        }
-        else if weatherName.text? .contains("Scattered Clouds") == true
-        {
-            weatherIcon.image = #imageLiteral(resourceName: "Clear")
-        }
-        else
-        {
-        weatherIcon.image = UIImage(named: weather)
-        }
-        
-        print(locationsArray)
 
         
         self.hideKeyboardWhenTappedAround()
@@ -559,7 +589,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         let overcastQuoteArray = ["Dark and cloudy.", "Gloomy. Hey at least it's not raining.", "Cheer up! Or be a grump."]
         let randomIndex1 = Int(arc4random_uniform(UInt32(overcastQuoteArray.count)))
         
-        let sunnyQuoteArray = ["Finally. Sun.", "Stop checking the weather and get outside!", "Free tans!"]
+        let sunnyQuoteArray = ["Finally! Sun.", "Stop checking the weather and get outside!", "Free tans!"]
         let randomIndex2 = Int(arc4random_uniform(UInt32(sunnyQuoteArray.count)))
         
         let thunderQuoteArray = ["Boomshakalaka.", "Get inside!", "1 in 700,000."]
@@ -580,7 +610,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         let windyOvercastQuoteArray = ["Breezy and cloudy.", "Don't get carried away!", "Can you go back to sleep? NO."]
         let randomIndex8 = Int(arc4random_uniform(UInt32(windySunnyQuoteArray.count)))
         
-        let scatteredCloudsArray = ["That one cloud tho.", "Scattered Clouds: Can I copy your HW? /nClear: Yeah, but make sure to change it", "One cloud, two cloud, red cloud, blue cloud."]
+        let scatteredCloudsArray = ["That one cloud tho.", "Scattered Clouds: Can I copy your HW? \nClear: Yeah, but make sure to \nchange it", "One cloud, two cloud, red cloud, blue cloud."]
         let randomIndex11 = Int(arc4random_uniform(UInt32(scatteredCloudsArray.count)))
         
         
@@ -633,7 +663,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         }
         if weatherName.text? .contains("Scattered Clouds") == true
         {
-                quoteLabel.text = windyOvercastQuoteArray[randomIndex11]
+                quoteLabel.text = scatteredCloudsArray[randomIndex11]
                 backgroundImageView.image = UIImage(named: "ScatteredCloudsImage")
         }
         
@@ -658,89 +688,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
         }
         
-        
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-        {
-            
-            
-            print("big boi collection views test")
-            if collectionView == hourlyCollectionView
-            {
-                
-                
-                let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-                
-                
-                
-                let hourly = hourlyInfo[indexPath.row]
-                
-                if hourly["condition"]! .contains("Thunderstorm")
-                {
-                    cellA.imgImage?.image = #imageLiteral(resourceName: "Thunderstorm")
-                }
-                    
-                else
-                {
-                    cellA.imgImage?.image = UIImage(named: hourly["condition"]!)
-                }
-                
-                var twelveHourTime: Int = Int(hourly["hour"]!)!
-                
-                if twelveHourTime>12
-                {
-                    twelveHourTime -= 12
-                    cellA.hourlyTimeLabel?.text = String(twelveHourTime)
-                }
-                else if twelveHourTime == 0
-                {
-                    twelveHourTime += 12
-                    cellA.hourlyTimeLabel?.text = String(twelveHourTime)
-                }
-                else
-                {
-                    cellA.hourlyTimeLabel?.text = hourly["hour"]
-                }
-                cellA.hourlyTempLabel?.text = hourly["english"]!
-                cellA.pmLabel?.text = hourly["ampm"]
-                return cellA
-                
-                
-            }
-                
-                
-            else
-            {
-                let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
-                
-                
-                let daily = dailyInfo[indexPath.row]
-                if daily["conditions"]! .contains("Thunder") == true
-                {
-                    cellB.imgImage2?.image = #imageLiteral(resourceName: "Thunderstorm")
-                }
-                else
-                {
-                    cellB.imgImage2?.image = UIImage(named: daily["conditions"]!)
-                }
-                cellB.dailyDayLabel?.text = daily["weekday"]
-                cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
-                cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
-                
-                
-                
-                
-                return cellB
-            }
-            
-            
-            
-            
-        }
-
-        
-
-
-        
+  
     }
     
     
@@ -812,9 +760,16 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
             let hourly = hourlyInfo[indexPath.row]
             
-            if hourly["condition"]! .contains("Thunderstorm")
+            if hourly["condition"]! .contains("Thunderstorm") == true
             {
+                
                 cellA.imgImage?.image = #imageLiteral(resourceName: "Thunderstorm")
+            }
+                
+            else if hourly["condition"]! .contains("Rain") == true
+            {
+                print("you big boi")
+                cellA.imgImage?.image = #imageLiteral(resourceName: "Rain")
             }
                 
             else
@@ -838,7 +793,15 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             {
                 cellA.hourlyTimeLabel?.text = hourly["hour"]
             }
+            
+            if currentTemp.text? .contains("F") == true
+            {
             cellA.hourlyTempLabel?.text = hourly["english"]!
+            }
+            else
+            {
+            cellA.hourlyTempLabel?.text = hourly["metric"]!
+            }
             cellA.pmLabel?.text = hourly["ampm"]
             return cellA
             
@@ -856,13 +819,27 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             {
                 cellB.imgImage2?.image = #imageLiteral(resourceName: "Thunderstorm")
             }
+            else if daily["conditions"]! .contains("Rain") == true
+            {
+                cellB.imgImage2?.image = #imageLiteral(resourceName: "Rain")
+            }
             else
             {
                 cellB.imgImage2?.image = UIImage(named: daily["conditions"]!)
             }
+            
             cellB.dailyDayLabel?.text = daily["weekday"]
+            
+            if currentTemp.text? .contains("F") == true
+            {
             cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
             cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
+            }
+            else
+            {
+            cellB.dailyTempLowLabel?.text = daily["celsiusL"]
+            cellB.dailyTempHighLabel?.text = daily["celsiusH"]
+            }
             
             
             
@@ -885,45 +862,12 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         AppUtility.lockOrientation(.all)
     }
     
-    @IBAction func temperatureUnitSwitch(_ sender: Any)
-    {
+    
         
-        if currentTemp.text ==  String(format: "%.0fºF", arguments: [tempF])
-        {
-            currentTemp.text = String(format: "%.0fºC", arguments: [tempC])
-            dewpoint.text = String(format: "Dewpoint: %.0fºC", arguments: [dewpointC])
-            feelsLike.text = "It Feels Like: " + feelsLikeC + "ºC"
-            if windchillC == "NA"
-            {
-                windchill.text = "Windchill: " + "NA"
-            }
-            else
-            {
-                windchill.text = "Windchill: " + windchillC + "ºC"
-            }
-        }
-            
-            
-            
-            
-            
-        else if currentTemp.text == String(format: "%.0fºC", arguments: [tempC])
-        {
-            currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
-            dewpoint.text = String(format: "Dewpoint: %.0fºF", arguments: [dewpointF])
-            windchill.text = "Windchill: " + windchillF + "ºF"
-            feelsLike.text = "It Feels Like: " + feelsLikeF + "ºF"
-            if windchillC == "NA"
-            {
-                windchill.text = "Windchill: " + "NA"
-            }
-            else
-            {
-                windchill.text = "Windchill: " + windchillF + "ºF"
-            }
-        }
+       
+    
         
-    }
+    
     
     
     
@@ -931,18 +875,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     @IBAction func distanceUnitSwitch(_ sender: Any)
     {
-        if visibility.text == "Visibility: " + visibilityMi + " Miles"
-        {
-            visibility.text = "Visibility: " + visibilityKm + " Kilometers"
-            windSpeed.text = "Wind Speed: " + String(windKph) + " Kph"
-        }
-            
-            
-            
-        else if visibility.text == "Visibility: " + visibilityKm + " Kilometers"
-        {
-            visibility.text = "Visibility: " + visibilityMi + " Miles"
-            windSpeed.text = "Wind Speed: " + String(windMph)  + " Mph"
+        UIView.animate(withDuration: 0.5) { 
+           self.viewDidAppear(true)
         }
 
     }
