@@ -203,7 +203,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         let randomIndex1 = Int(arc4random_uniform(UInt32(overcastQuoteArray.count)))
         print(overcastQuoteArray[randomIndex])
         
-        let sunnyQuoteArray = ["Finally. Sun.", "Stop checking the weather and get outside!", "Free tans!"]
+        let sunnyQuoteArray = ["Finally! Sun.", "Stop checking the weather and get outside!", "Free tans!"]
         let randomIndex2 = Int(arc4random_uniform(UInt32(sunnyQuoteArray.count)))
         print(sunnyQuoteArray[randomIndex])
         
@@ -753,26 +753,15 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         print("hi")
         locationsTableView.alpha = 1
         
-        let string = stateLabel.text! + townLabel.text!
-        let character = " "
-        if string.contains(character)
-        {
-            let myAlert = UIAlertController(title: "ERROR", message: "Your information may have been fomatted incorrectly.", preferredStyle: UIAlertControllerStyle.alert)
-            let dismissButton = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
-            myAlert.addAction(dismissButton)
-            present(myAlert, animated: true, completion: nil)
-            
-//            townLabel.text? .replacingOccurrences(of: " ", with: "_")
-        }
-        else
-        {
+        
+        
             
             locationsArray.append(townLabel.text! + ", " + stateLabel.text!)
             print(locationsArray)
             
             state = stateLabel.text!
-            townURL = townLabel.text!
-            town = (townLabel.text?.replacingOccurrences(of: "_", with: " "))!
+            townURL = (townLabel.text?.replacingOccurrences(of: " ", with: "_"))!
+            town = townLabel.text!
             
             locationLabel.text = town + ", " + state
 
@@ -786,7 +775,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
             })
             
-        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
