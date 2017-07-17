@@ -98,6 +98,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var settingsView: UIView!
     
     
+    @IBOutlet weak var locationsRealVersionView: UIView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     @IBOutlet weak var locationsView: UIView!
@@ -282,7 +283,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         settingsView.alpha = 0
       
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
+        sideBar = SideBar(sourceView: self.view, menuItems: ["Weather", "Enter Location", "Settings", "About ⓘ"])
         sideBar.delegate = self
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
@@ -486,47 +487,26 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             }
         }
         
-        if temperatureUnitSwitch.isOn == false
-        {
-            print("why are you so angry")
-            currentTemp.text = String(format: "%.0fºC", arguments: [tempC])
-            dewpoint.text = String(format: "Dewpoint: %.0fºC", arguments: [dewpointC])
-            feelsLike.text = "It Feels Like: " + feelsLikeC + "ºC"
-            if windchillC == "NA"
-            {
-                windchill.text = "Windchill: " + "NA"
-            }
-            else
-            {
-                windchill.text = "Windchill: " + windchillC + "ºC"
-            }
-            hourlyCollectionView.reloadData()
-            dailyCollectionView.reloadData()
-            
-        }
-            
-            
-            
-            
-            
-        else if temperatureUnitSwitch.isOn == true
-        {
-            print("you bicboi")
-            currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
-            dewpoint.text = String(format: "Dewpoint: %.0fºF", arguments: [dewpointF])
-            windchill.text = "Windchill: " + windchillF + "ºF"
-            feelsLike.text = "It Feels Like: " + feelsLikeF + "ºF"
-            if windchillC == "NA"
-            {
-                windchill.text = "Windchill: " + "NA"
-            }
-            else
-            {
-                windchill.text = "Windchill: " + windchillF + "ºF"
-            }
-            hourlyCollectionView.reloadData()
-            dailyCollectionView.reloadData()
-        }
+        visualEffectView.alpha = 0
+        aboutView.alpha = 0
+        locationsView.alpha = 0
+        settingsView.alpha = 0
+        
+        imageView.image = UIImage(named: "image2")
+        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Enter Location", "Locations",  "Settings", "About ⓘ"])
+        sideBar.delegate = self
+        
+        lastUpdatedInfoLabel.text = lastUpdatedInfo
+        
+        currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
+        
+        
+        //locationLabel.text = fullName
+        weatherName.text = weather
+        weatherName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        weatherName.adjustsFontForContentSizeCategory = true
+        weatherName.adjustsFontSizeToFitWidth = true
+        weatherName.numberOfLines = 2
         
         
         if distanceUnitSwitch.isOn == false
@@ -1012,6 +992,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             aboutView.alpha = 0
             locationsView.alpha = 0
             settingsView.alpha = 0
+            locationsRealVersionView.alpha = 0
             
         }
             
@@ -1020,22 +1001,36 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             locationsView.alpha = 1
             settingsView.alpha = 0
             aboutView.alpha = 0
+            locationsRealVersionView.alpha = 0
             
 
         }
         else if index == 2
         {
-            settingsView.alpha = 1
+            settingsView.alpha = 0
             aboutView.alpha = 0
             locationsView.alpha = 0
+            locationsRealVersionView.alpha = 1
         }
         else if index == 3
+        {
+            aboutView.alpha = 0
+            locationsView.alpha = 0
+            settingsView.alpha = 1
+            locationsRealVersionView.alpha = 0
+
+            
+        }
+        else if index == 4
         {
             aboutView.alpha = 1
             locationsView.alpha = 0
             settingsView.alpha = 0
+            locationsRealVersionView.alpha = 0
+            
             
         }
+
     }
     
     
