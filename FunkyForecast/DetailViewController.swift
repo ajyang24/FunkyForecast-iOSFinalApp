@@ -44,7 +44,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     
     
-
+    var detailItem: String = ""
     var sideBar:SideBar = SideBar()
     var dailyInfo = [[String: String]]()
     var hourlyInfo = [[String: String]]()
@@ -183,11 +183,21 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        lastUpdatedInfoLabel.text = lastUpdatedInfo
        
         
         let partlyCloudyQuoteArray = ["Cloudy with a chance of meatballs.", "Half and half.", "Look up."]
         let randomIndex = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
         print(partlyCloudyQuoteArray[randomIndex])
+        
+        let mostlyCloudyQuoteArray = ["Way too many clouds.", "Wow. No sun?", "See the aurora of gloominess yet?"]
+        let randomIndex9 = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
+        print(partlyCloudyQuoteArray[randomIndex9])
+        
+        let cloudyQuoteArray = ["Really Cloudy.", "99% Clouds, 1% Sun.", "Is it fog?"]
+        let randomIndex10 = Int(arc4random_uniform(UInt32(cloudyQuoteArray.count)))
+        print(cloudyQuoteArray[randomIndex10])
+        
         
         let overcastQuoteArray = ["Dark and cloudy.", "Gloomy. Hey at least it's not raining.", "Cheer up! Or be a grump."]
         let randomIndex1 = Int(arc4random_uniform(UInt32(overcastQuoteArray.count)))
@@ -223,15 +233,17 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         
         
+        
+        
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
         
-        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
-        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
-        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+        currentWeatherURL = "https://api.wunderground.com/api/bd611d6b316f1031/conditions/q/\(state)/\(townURL).json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bd611d6b316f1031/hourly/q/\(state)/\(townURL).json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bd611d6b316f1031/forecast7day/q/\(state)/\(townURL).json"
         
         
         
@@ -309,6 +321,43 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         weatherIcon.image = UIImage(named: weather)
         } 
         self.hideKeyboardWhenTappedAround()
+        
+        if weatherName.text == "Partly Cloudy" || weatherName.text == "Mostly Cloudy"{
+           quoteLabel.text = partlyCloudyQuoteArray[randomIndex]
+        backgroundImageView.image = UIImage(named: "PartlyCloudyImage")
+        }
+        if weatherName.text == "Overcast" {
+        quoteLabel.text = overcastQuoteArray[randomIndex1]
+        backgroundImageView.image = UIImage(named: "OvercastImage")
+        }
+        if weatherName.text == "Sunny" || weatherName.text == "Clear" {
+        quoteLabel.text = sunnyQuoteArray[randomIndex2]
+        backgroundImageView.image = UIImage(named: "SunnyImage")
+        }
+        if weatherName.text? .contains("Thunder") == true || weatherName.text? .contains("Thunderstorm") == true  {
+        quoteLabel.text = thunderQuoteArray[randomIndex3]
+        backgroundImageView.image = UIImage(named: "ThunderImage")
+        }
+        if weatherName.text? .contains("Snow") == true  {
+        quoteLabel.text = snowQuoteArray[randomIndex4]
+        backgroundImageView.image = UIImage(named: "SnowImage")
+        }
+        if weatherName.text? .contains("Rain") == true  {
+        quoteLabel.text = rainQuoteArray[randomIndex5]
+        backgroundImageView.image = UIImage(named: "RainImage")
+        }
+        if weatherName.text? .contains("Fog") == true  {
+        quoteLabel.text = fogQuoteArray[randomIndex6]
+        backgroundImageView.image = UIImage(named: "FogImage")
+        }
+        if weatherName.text? .contains("Windy") == true && windMph>20 && (weatherIcon == UIImage(named: "Clear") || weatherIcon == UIImage(named: "Sunny")!)  {
+        quoteLabel.text = windySunnyQuoteArray[randomIndex7]
+        backgroundImageView.image = UIImage(named: "WindySunnyImage")
+        }
+        if weatherName.text? .contains("Windy") == true && windMph>20 && (weatherIcon == UIImage(named: "Overcast")! || weatherIcon == UIImage(named: "Fog")!)   {
+        quoteLabel.text = windyOvercastQuoteArray[randomIndex8]
+        backgroundImageView.image = UIImage(named: "WindyOvercastImage")
+        }
 
     }
    
@@ -340,9 +389,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     {
         let cell = locationsTableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
-        
         cell.textLabel?.text = locationsArray[indexPath.row]
-        
         
         return cell
             
@@ -350,102 +397,40 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = locationsTableView.indexPathForSelectedRow
         
-        if collectionView == hourlyCollectionView
-        {
-            print(hourlyInfo.count)
-            return hourlyInfo.count
-            
-        }
-        else
-        {
-            print(dailyInfo.count)
-            return dailyInfo.count
-        }
+        let currentCell = locationsTableView.cellForRow(at: indexPath!) as! UITableViewCell
         
-    
+//        print(currentCell.textLabel.text)
+        
+        let currentCellLocation = currentCell.textLabel!.text
+        
+        print(currentCellLocation!)
+        
+        let stringOfWords = currentCellLocation!
+        let stringOfWordsArray = stringOfWords.components(separatedBy: ", ")
+        let townWord = stringOfWordsArray[0]
+        let stateWord = stringOfWordsArray[1]
+        
+        
+        dailyInfo.removeAll()
+        hourlyInfo.removeAll()
+        
+        UIView.animate(withDuration: 0.5, animations:
+            {
+                self.state = stateWord
+                self.townURL = townWord
+                self.town = townWord
+
+                self.viewDidAppear(true)
+                
+        })
+
+        
         
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        
-        
-        
-        if collectionView == hourlyCollectionView
-        {
-            
-            
-            let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-            
-            
-            
-            let hourly = hourlyInfo[indexPath.row]
-            
-            if hourly["condition"]! .contains("Thunderstorm")
-            {
-            cellA.imgImage?.image = #imageLiteral(resourceName: "Thunderstorm")
-            }
-            
-            else
-            {
-            cellA.imgImage?.image = UIImage(named: hourly["condition"]!)
-            }
-            
-            var twelveHourTime: Int = Int(hourly["hour"]!)!
-            
-            if twelveHourTime>12
-            {
-                twelveHourTime -= 12
-                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
-            }
-            else if twelveHourTime == 0
-            {
-                twelveHourTime += 12
-                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
-            }
-            else
-            {
-                cellA.hourlyTimeLabel?.text = hourly["hour"]
-            }
-            cellA.hourlyTempLabel?.text = hourly["english"]!
-                cellA.pmLabel?.text = hourly["ampm"]
-            return cellA
-            
-            
-        }
-            
-            
-        else
-        {
-            let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
-            
-            
-            let daily = dailyInfo[indexPath.row]
-            if daily["conditions"]! .contains("Thunder") == true
-            {
-                cellB.imgImage2?.image = #imageLiteral(resourceName: "Thunderstorm")
-            }
-            else
-            {
-            cellB.imgImage2?.image = UIImage(named: daily["conditions"]!)
-            }
-            cellB.dailyDayLabel?.text = daily["weekday"]
-            cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
-            cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
-            
-            
-        
-            
-            return cellB
-        }
-
-        
-       
-
-    }
     
     
 
@@ -454,6 +439,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("view did appear test")
+        
+        
        
 
         
@@ -467,11 +455,11 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
-        print(state)
+//        print(state)
         
-        currentWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/conditions/q/\(state)/\(townURL).json"
-        hourlyWeatherURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/hourly/q/\(state)/\(townURL).json"
-        sevenDayForecastURL = "https://api.wunderground.com/api/bf7798dd77b9bf97/forecast7day/q/\(state)/\(townURL).json"
+        currentWeatherURL = "https://api.wunderground.com/api/bd611d6b316f1031/conditions/q/\(state)/\(townURL).json"
+        hourlyWeatherURL = "https://api.wunderground.com/api/bd611d6b316f1031/hourly/q/\(state)/\(townURL).json"
+        sevenDayForecastURL = "https://api.wunderground.com/api/bd611d6b316f1031/forecast7day/q/\(state)/\(townURL).json"
         
         
         
@@ -510,12 +498,12 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         imageView.image = UIImage(named: "image2")
         sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
         sideBar.delegate = self
+        lastUpdatedInfoLabel.text = lastUpdatedInfo
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
         
         
         //locationLabel.text = fullName
-        quoteLabel.text = "Dangerous Precipitation: A Rain of Terror"
         weatherName.text = weather
         weatherName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
         weatherName.adjustsFontForContentSizeCategory = true
@@ -553,6 +541,202 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
 
         
         self.hideKeyboardWhenTappedAround()
+        
+        let partlyCloudyQuoteArray = ["Cloudy with a chance of meatballs.", "Half and half.", "Look up."]
+        let randomIndex = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
+        print(partlyCloudyQuoteArray[randomIndex])
+        
+        let mostlyCloudyQuoteArray = ["Way too many clouds.", "Wow. No sun?", "See the aurora of gloominess yet?"]
+        let randomIndex9 = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
+        print(partlyCloudyQuoteArray[randomIndex9])
+        
+        let cloudyQuoteArray = ["Really Cloudy.", "99% Clouds, 1% Sun.", "Is it fog?"]
+        let randomIndex10 = Int(arc4random_uniform(UInt32(cloudyQuoteArray.count)))
+        print(cloudyQuoteArray[randomIndex10])
+        
+        
+        let overcastQuoteArray = ["Dark and cloudy.", "Gloomy. Hey at least it's not raining.", "Cheer up! Or be a grump."]
+        let randomIndex1 = Int(arc4random_uniform(UInt32(overcastQuoteArray.count)))
+        print(overcastQuoteArray[randomIndex])
+        
+        let sunnyQuoteArray = ["Finally. Sun.", "Stop checking the weather and get outside!", "Free tans!"]
+        let randomIndex2 = Int(arc4random_uniform(UInt32(sunnyQuoteArray.count)))
+        print(sunnyQuoteArray[randomIndex])
+        
+        let thunderQuoteArray = ["Boomshakalaka.", "Get inside!", "1 in 700,000."]
+        let randomIndex3 = Int(arc4random_uniform(UInt32(thunderQuoteArray.count)))
+        print(thunderQuoteArray[randomIndex3])
+        
+        let snowQuoteArray = ["Look outside.", "Where's my present?", "Who said Global Warming was real?"]
+        let randomIndex4 = Int(arc4random_uniform(UInt32(snowQuoteArray.count)))
+        print(snowQuoteArray[randomIndex4])
+        
+        let rainQuoteArray = ["Pitter patter.", "Don't forget your umbrella.", "Hey, free showers!"]
+        let randomIndex5 = Int(arc4random_uniform(UInt32(rainQuoteArray.count)))
+        print(rainQuoteArray[randomIndex5])
+        
+        let fogQuoteArray = ["Can't even see 100 feet ahead.", "Is it overcast? Or fog? Or both?", "What is fog?"]
+        let randomIndex6 = Int(arc4random_uniform(UInt32(fogQuoteArray.count)))
+        print(fogQuoteArray[randomIndex6])
+        
+        let windySunnyQuoteArray = ["Breezy, but nice.", "Don't get carried away!", "Perfect weather."]
+        let randomIndex7 = Int(arc4random_uniform(UInt32(windySunnyQuoteArray.count)))
+        print(windySunnyQuoteArray[randomIndex7])
+        
+        let windyOvercastQuoteArray = ["Breezy and cloudy.", "Don't get carried away!", "Gloomy and cloudy. Boohoo."]
+        let randomIndex8 = Int(arc4random_uniform(UInt32(windySunnyQuoteArray.count)))
+        print(windySunnyQuoteArray[randomIndex8])
+        
+        if weatherName.text == "Partly Cloudy" {
+            quoteLabel.text = partlyCloudyQuoteArray[randomIndex]
+            backgroundImageView.image = UIImage(named: "PartlyCloudyImage")
+        }
+        
+        if weatherName.text == "Mostly Cloudy" {
+            quoteLabel.text = mostlyCloudyQuoteArray[randomIndex9]
+            backgroundImageView.image = UIImage(named: "MostlyCloudyImage")
+        }
+        
+        if weatherName.text == "Cloudy" {
+            quoteLabel.text = cloudyQuoteArray[randomIndex10]
+            backgroundImageView.image = UIImage(named: "CloudyImage")
+        }
+        
+        if weatherName.text == "Overcast" {
+            quoteLabel.text = overcastQuoteArray[randomIndex1]
+            backgroundImageView.image = UIImage(named: "OvercastImage")
+        }
+        if weatherName.text == "Sunny" || weatherName.text == "Clear" {
+            quoteLabel.text = sunnyQuoteArray[randomIndex2]
+            backgroundImageView.image = UIImage(named: "SunnyImage")
+        }
+        if weatherName.text? .contains("Thunder") == true || weatherName.text? .contains("Thunderstorm") == true  {
+            quoteLabel.text = thunderQuoteArray[randomIndex3]
+            backgroundImageView.image = UIImage(named: "ThunderImage")
+        }
+        if weatherName.text? .contains("Snow") == true  {
+            quoteLabel.text = snowQuoteArray[randomIndex4]
+            backgroundImageView.image = UIImage(named: "SnowImage")
+        }
+        if weatherName.text? .contains("Rain") == true  {
+            quoteLabel.text = rainQuoteArray[randomIndex5]
+            backgroundImageView.image = UIImage(named: "RainImage")
+        }
+        if weatherName.text? .contains("Fog") == true  {
+            quoteLabel.text = fogQuoteArray[randomIndex6]
+            backgroundImageView.image = UIImage(named: "FogImage")
+        }
+        if weatherName.text? .contains("Windy") == true && windMph>20 && (weatherIcon == UIImage(named: "Clear") || weatherIcon == UIImage(named: "Sunny")!)  {
+            quoteLabel.text = windySunnyQuoteArray[randomIndex7]
+            backgroundImageView.image = UIImage(named: "WindySunnyImage")
+        }
+        if weatherName.text? .contains("Windy") == true && windMph>20 && (weatherIcon == UIImage(named: "Overcast")! || weatherIcon == UIImage(named: "Fog")!)   {
+            quoteLabel.text = windyOvercastQuoteArray[randomIndex8]
+            backgroundImageView.image = UIImage(named: "WindyOvercastImage")
+        }
+        
+        print("view did appear test 2")
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            
+            
+            print("Big boi test number of items")
+            if collectionView == hourlyCollectionView
+            {
+                print(hourlyInfo.count)
+                return hourlyInfo.count
+                
+            }
+            else
+            {
+                print(dailyInfo.count)
+                return dailyInfo.count
+            }
+            
+            
+            
+        }
+        
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+        {
+            
+            
+            print("big boi collection views test")
+            if collectionView == hourlyCollectionView
+            {
+                
+                
+                let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
+                
+                
+                
+                let hourly = hourlyInfo[indexPath.row]
+                
+                if hourly["condition"]! .contains("Thunderstorm")
+                {
+                    cellA.imgImage?.image = #imageLiteral(resourceName: "Thunderstorm")
+                }
+                    
+                else
+                {
+                    cellA.imgImage?.image = UIImage(named: hourly["condition"]!)
+                }
+                
+                var twelveHourTime: Int = Int(hourly["hour"]!)!
+                
+                if twelveHourTime>12
+                {
+                    twelveHourTime -= 12
+                    cellA.hourlyTimeLabel?.text = String(twelveHourTime)
+                }
+                else if twelveHourTime == 0
+                {
+                    twelveHourTime += 12
+                    cellA.hourlyTimeLabel?.text = String(twelveHourTime)
+                }
+                else
+                {
+                    cellA.hourlyTimeLabel?.text = hourly["hour"]
+                }
+                cellA.hourlyTempLabel?.text = hourly["english"]!
+                cellA.pmLabel?.text = hourly["ampm"]
+                return cellA
+                
+                
+            }
+                
+                
+            else
+            {
+                let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
+                
+                
+                let daily = dailyInfo[indexPath.row]
+                if daily["conditions"]! .contains("Thunder") == true
+                {
+                    cellB.imgImage2?.image = #imageLiteral(resourceName: "Thunderstorm")
+                }
+                else
+                {
+                    cellB.imgImage2?.image = UIImage(named: daily["conditions"]!)
+                }
+                cellB.dailyDayLabel?.text = daily["weekday"]
+                cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
+                cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
+                
+                
+                
+                
+                return cellB
+            }
+            
+            
+            
+            
+        }
+
+        
+
 
         
     }
@@ -565,7 +749,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBAction func enterLocationButton(_ sender: Any)
     {
         print("hi")
-        
+        locationsTableView.alpha = 1
         
         let string = stateLabel.text! + townLabel.text!
         let character = " "
@@ -575,6 +759,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             let dismissButton = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
             myAlert.addAction(dismissButton)
             present(myAlert, animated: true, completion: nil)
+            
+//            townLabel.text? .replacingOccurrences(of: " ", with: "_")
         }
         else
         {
@@ -588,6 +774,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
             locationLabel.text = town + ", " + state
 
+            dailyInfo.removeAll()
+            hourlyInfo.removeAll()
+            
+            
             UIView.animate(withDuration: 0.5, animations:
             {
                 self.viewDidAppear(true)
@@ -595,6 +785,103 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             })
             
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == hourlyCollectionView
+        {
+            print(hourlyInfo.count)
+            return hourlyInfo.count
+            
+        }
+        else
+        {
+            print(dailyInfo.count)
+            return dailyInfo.count
+        }
+        
+        
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        
+        
+        
+        if collectionView == hourlyCollectionView
+        {
+            
+            
+            let cellA = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
+            
+            
+            
+            let hourly = hourlyInfo[indexPath.row]
+            
+            if hourly["condition"]! .contains("Thunderstorm")
+            {
+                cellA.imgImage?.image = #imageLiteral(resourceName: "Thunderstorm")
+            }
+                
+            else
+            {
+                cellA.imgImage?.image = UIImage(named: hourly["condition"]!)
+            }
+            
+            var twelveHourTime: Int = Int(hourly["hour"]!)!
+            
+            if twelveHourTime>12
+            {
+                twelveHourTime -= 12
+                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
+            }
+            else if twelveHourTime == 0
+            {
+                twelveHourTime += 12
+                cellA.hourlyTimeLabel?.text = String(twelveHourTime)
+            }
+            else
+            {
+                cellA.hourlyTimeLabel?.text = hourly["hour"]
+            }
+            cellA.hourlyTempLabel?.text = hourly["english"]!
+            cellA.pmLabel?.text = hourly["ampm"]
+            return cellA
+            
+            
+        }
+            
+            
+        else
+        {
+            let cellB = dailyCollectionView.dequeueReusableCell(withReuseIdentifier: "Image2CollectionViewCell", for: indexPath) as! Image2CollectionViewCell
+            
+            
+            let daily = dailyInfo[indexPath.row]
+            if daily["conditions"]! .contains("Thunder") == true
+            {
+                cellB.imgImage2?.image = #imageLiteral(resourceName: "Thunderstorm")
+            }
+            else
+            {
+                cellB.imgImage2?.image = UIImage(named: daily["conditions"]!)
+            }
+            cellB.dailyDayLabel?.text = daily["weekday"]
+            cellB.dailyTempLowLabel?.text = daily["fahrenheitL"]
+            cellB.dailyTempHighLabel?.text = daily["fahrenheitH"]
+            
+            
+            
+            
+            return cellB
+        }
+        
+        
+        
+        
     }
     
     
@@ -825,6 +1112,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             
         }
     }
+    
+    
+    
 
 
 }
