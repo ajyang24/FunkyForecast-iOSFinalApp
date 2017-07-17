@@ -219,7 +219,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         let randomIndex5 = Int(arc4random_uniform(UInt32(rainQuoteArray.count)))
         print(rainQuoteArray[randomIndex5])
         
-        let fogQuoteArray = ["Can't even see 100 feet ahead.", "Is it overcast? Or fog? Or both?", "What is fog?"]
+        let fogQuoteArray = ["Warning: Viewing distance has dramatically decreased.", "Is it overcast? Or fog? Or both?", "What even is fog?"]
         let randomIndex6 = Int(arc4random_uniform(UInt32(fogQuoteArray.count)))
         print(fogQuoteArray[randomIndex6])
         
