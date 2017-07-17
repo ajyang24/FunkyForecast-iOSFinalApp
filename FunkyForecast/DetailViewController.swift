@@ -96,6 +96,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     @IBOutlet weak var settingsView: UIView!
     
     
+    @IBOutlet weak var locationsRealVersionView: UIView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     @IBOutlet weak var locationsView: UIView!
@@ -280,7 +281,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         settingsView.alpha = 0
       
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
+        sideBar = SideBar(sourceView: self.view, menuItems: ["Weather", "Enter Location", "Settings", "About ⓘ"])
         sideBar.delegate = self
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
@@ -496,8 +497,9 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         settingsView.alpha = 0
         
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Locations", "Settings", "About ⓘ"])
+        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Enter Location", "Locations",  "Settings", "About ⓘ"])
         sideBar.delegate = self
+        
         lastUpdatedInfoLabel.text = lastUpdatedInfo
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
@@ -1078,6 +1080,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             aboutView.alpha = 0
             locationsView.alpha = 0
             settingsView.alpha = 0
+            locationsRealVersionView.alpha = 0
             
         }
             
@@ -1086,22 +1089,36 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             locationsView.alpha = 1
             settingsView.alpha = 0
             aboutView.alpha = 0
+            locationsRealVersionView.alpha = 0
             
 
         }
         else if index == 2
         {
-            settingsView.alpha = 1
+            settingsView.alpha = 0
             aboutView.alpha = 0
             locationsView.alpha = 0
+            locationsRealVersionView.alpha = 1
         }
         else if index == 3
+        {
+            aboutView.alpha = 0
+            locationsView.alpha = 0
+            settingsView.alpha = 1
+            locationsRealVersionView.alpha = 0
+
+            
+        }
+        else if index == 4
         {
             aboutView.alpha = 1
             locationsView.alpha = 0
             settingsView.alpha = 0
+            locationsRealVersionView.alpha = 0
+            
             
         }
+
     }
     
     
