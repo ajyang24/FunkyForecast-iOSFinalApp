@@ -74,6 +74,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var lastUpdatedInfo = ""
     
     
+    @IBOutlet weak var myScrollView: UIScrollView!
     
     @IBOutlet weak var temperatureUnitSwitch: UISwitch!
     
@@ -311,6 +312,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             windchill.text = "Windchill: " + windchillF + "ºF"
         }
         
+        if weather .contains("Fog") == true
+        {
+            weatherIcon.image = #imageLiteral(resourceName: "Fog")
+        }
         if weather .contains("Thunder") == true
         {
             weatherIcon.image = #imageLiteral(resourceName: "Thunderstorm")
@@ -402,7 +407,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         let townWord = stringOfWordsArray[0]
         let stateWord = stringOfWordsArray[1]
         
-        
+        locationsRealVersionView.alpha = 0
         dailyInfo.removeAll()
         hourlyInfo.removeAll()
         
@@ -438,6 +443,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         print("view did appear test")
         
         lastUpdatedInfoLabel.text = lastUpdatedInfo
+        
+        backgroundImageView.alpha = 1
+        imageView.alpha = 1
+        imageView.backgroundColor = UIColor.clear
         
         
         
@@ -566,7 +575,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         relativeHumidity.text = "Relative Humidity: " + humidity
         uvIndex.text! = "UV Index: " + uv
         
-        
+        if weather .contains("Fog") == true
+        {
+            weatherIcon.image = #imageLiteral(resourceName: "Fog")
+        }
         if weather .contains("Thunder") == true
         {
             weatherIcon.image = #imageLiteral(resourceName: "Thunderstorm")
@@ -1034,6 +1046,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             locationsView.alpha = 0
             settingsView.alpha = 0
             locationsRealVersionView.alpha = 0
+            backgroundImageView.alpha = 1
+            imageView.alpha = 1
             
         }
             
@@ -1043,6 +1057,14 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             settingsView.alpha = 0
             aboutView.alpha = 0
             locationsRealVersionView.alpha = 0
+
+            backgroundImageView.alpha = 0
+            imageView.alpha = 0
+            
+            
+            
+            
+            
             
 
         }
@@ -1052,6 +1074,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             aboutView.alpha = 0
             locationsView.alpha = 0
             locationsRealVersionView.alpha = 1
+            backgroundImageView.alpha = 0
+            imageView.alpha = 0
         }
         else if index == 3
         {
@@ -1059,6 +1083,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             locationsView.alpha = 0
             settingsView.alpha = 1
             locationsRealVersionView.alpha = 0
+            backgroundImageView.alpha = 0
+            imageView.alpha = 0
 
             
         }
@@ -1068,6 +1094,8 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
             locationsView.alpha = 0
             settingsView.alpha = 0
             locationsRealVersionView.alpha = 0
+            backgroundImageView.alpha = 0
+            imageView.alpha = 0
             
             
         }
