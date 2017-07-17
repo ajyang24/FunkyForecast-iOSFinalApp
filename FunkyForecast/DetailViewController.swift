@@ -74,6 +74,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     var lastUpdatedInfo = ""
     
     
+    @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var myScrollView: UIScrollView!
     
     @IBOutlet weak var temperatureUnitSwitch: UISwitch!
@@ -189,7 +190,6 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         super.viewDidLoad()
         lastUpdatedInfoLabel.text = lastUpdatedInfo
        
-        
         let partlyCloudyQuoteArray = ["Cloudy with a chance of meatballs.", "Half and half.", "Look up."]
         let randomIndex = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
         print(partlyCloudyQuoteArray[randomIndex])
@@ -284,7 +284,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         settingsView.alpha = 0
       
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: ["Weather", "Enter Location", "Settings", "About ⓘ"])
+        sideBar = SideBar(sourceView: self.view, menuItems: ["Weather", "Enter Location", "Settings", "About"])
         sideBar.delegate = self
         
         currentTemp.text = String(format: "%.0fºF", arguments: [tempF])
@@ -414,7 +414,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         UIView.animate(withDuration: 0.5, animations:
             {
                 self.state = stateWord
-                self.townURL = townWord
+                self.townURL = townWord.replacingOccurrences(of: " ", with: "_")
                 self.town = townWord
 
                 self.viewDidAppear(true)
@@ -440,6 +440,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        loadingLabel.alpha = 0
         print("view did appear test")
         
         lastUpdatedInfoLabel.text = lastUpdatedInfo
@@ -502,7 +503,7 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         settingsView.alpha = 0
         
         imageView.image = UIImage(named: "image2")
-        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Enter Location", "Locations",  "Settings", "About ⓘ"])
+        sideBar = SideBar(sourceView: self.view, menuItems: [ "Weather", "Enter Location", "Locations",  "Settings", "About"])
         sideBar.delegate = self
         
         lastUpdatedInfoLabel.text = lastUpdatedInfo
