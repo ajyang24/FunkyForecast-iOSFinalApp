@@ -532,6 +532,10 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         {
             weatherIcon.image = #imageLiteral(resourceName: "Thunderstorm")
         }
+        else if weatherName.text? .contains("Scattered Clouds") == true
+        {
+            weatherIcon.image = #imageLiteral(resourceName: "Clear")
+        }
         else
         {
         weatherIcon.image = UIImage(named: weather)
@@ -544,48 +548,41 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         
         let partlyCloudyQuoteArray = ["Cloudy with a chance of meatballs.", "Half and half.", "Look up."]
         let randomIndex = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
-        print(partlyCloudyQuoteArray[randomIndex])
         
         let mostlyCloudyQuoteArray = ["Way too many clouds.", "Wow. No sun?", "See the aurora of gloominess yet?"]
         let randomIndex9 = Int(arc4random_uniform(UInt32(partlyCloudyQuoteArray.count)))
-        print(partlyCloudyQuoteArray[randomIndex9])
         
         let cloudyQuoteArray = ["Really Cloudy.", "99% Clouds, 1% Sun.", "Is it fog?"]
         let randomIndex10 = Int(arc4random_uniform(UInt32(cloudyQuoteArray.count)))
-        print(cloudyQuoteArray[randomIndex10])
         
         
         let overcastQuoteArray = ["Dark and cloudy.", "Gloomy. Hey at least it's not raining.", "Cheer up! Or be a grump."]
         let randomIndex1 = Int(arc4random_uniform(UInt32(overcastQuoteArray.count)))
-        print(overcastQuoteArray[randomIndex])
         
         let sunnyQuoteArray = ["Finally. Sun.", "Stop checking the weather and get outside!", "Free tans!"]
         let randomIndex2 = Int(arc4random_uniform(UInt32(sunnyQuoteArray.count)))
-        print(sunnyQuoteArray[randomIndex])
         
         let thunderQuoteArray = ["Boomshakalaka.", "Get inside!", "1 in 700,000."]
         let randomIndex3 = Int(arc4random_uniform(UInt32(thunderQuoteArray.count)))
-        print(thunderQuoteArray[randomIndex3])
         
         let snowQuoteArray = ["Look outside.", "Where's my present?", "Who said Global Warming was real?"]
         let randomIndex4 = Int(arc4random_uniform(UInt32(snowQuoteArray.count)))
-        print(snowQuoteArray[randomIndex4])
         
         let rainQuoteArray = ["Pitter patter.", "Don't forget your umbrella.", "Hey, free showers!"]
         let randomIndex5 = Int(arc4random_uniform(UInt32(rainQuoteArray.count)))
-        print(rainQuoteArray[randomIndex5])
         
         let fogQuoteArray = ["Can't even see 100 feet ahead.", "Is it overcast? Or fog? Or both?", "What is fog?"]
         let randomIndex6 = Int(arc4random_uniform(UInt32(fogQuoteArray.count)))
-        print(fogQuoteArray[randomIndex6])
         
         let windySunnyQuoteArray = ["Breezy, but nice.", "Don't get carried away!", "Perfect weather."]
         let randomIndex7 = Int(arc4random_uniform(UInt32(windySunnyQuoteArray.count)))
-        print(windySunnyQuoteArray[randomIndex7])
         
-        let windyOvercastQuoteArray = ["Breezy and cloudy.", "Don't get carried away!", "Gloomy and cloudy. Boohoo."]
+        let windyOvercastQuoteArray = ["Breezy and cloudy.", "Don't get carried away!", "Can you go back to sleep? NO."]
         let randomIndex8 = Int(arc4random_uniform(UInt32(windySunnyQuoteArray.count)))
-        print(windySunnyQuoteArray[randomIndex8])
+        
+        let scatteredCloudsArray = ["That one cloud tho.", "Scattered Clouds: Can I copy your HW? /nClear: Yeah, but make sure to change it", "One cloud, two cloud, red cloud, blue cloud."]
+        let randomIndex11 = Int(arc4random_uniform(UInt32(scatteredCloudsArray.count)))
+        
         
         if weatherName.text == "Partly Cloudy" {
             quoteLabel.text = partlyCloudyQuoteArray[randomIndex]
@@ -633,6 +630,11 @@ class DetailViewController: UIViewController, SideBarDelegate, CLLocationManager
         if weatherName.text? .contains("Windy") == true && windMph>20 && (weatherIcon == UIImage(named: "Overcast")! || weatherIcon == UIImage(named: "Fog")!)   {
             quoteLabel.text = windyOvercastQuoteArray[randomIndex8]
             backgroundImageView.image = UIImage(named: "WindyOvercastImage")
+        }
+        if weatherName.text? .contains("Scattered Clouds") == true
+        {
+                quoteLabel.text = windyOvercastQuoteArray[randomIndex11]
+                backgroundImageView.image = UIImage(named: "ScatteredCloudsImage")
         }
         
         print("view did appear test 2")
